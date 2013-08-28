@@ -7,7 +7,7 @@
  
 * stty -ixon 设置后可以使用Ctrl+s作为Ctrl+r的反向
 * zsh使用alt+_作为alt+.的反向搜索 在zshrc里加入
-  {{{
+  {{{class="brush: bash"
 insert-last-word-r () {
   zle insert-last-word -- 1
 }

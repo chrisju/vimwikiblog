@@ -11,8 +11,7 @@
 <!-- disqus -->
 <script type="text/javascript" src="%root_path%site/js/disqus.js"></script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+
 <script type="text/javascript" src="%root_path%site/sh/js/jquery-1.4.2.js"></script>
 <!-- SyntaxHighlighter -->
 <script type="text/javascript" src="%root_path%site/sh/src/shCore.js"></script>
