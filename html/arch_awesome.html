@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style0.css">
+<title>arch_awesome</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<h2 id="toc_0.1">安装</h2>
+
+<h2 id="toc_0.2">配置</h2>
+
+<h3 id="toc_0.2.1">网络 wicd</h3>
+<p>
+参考<a href="https://wiki.archlinux.org/index.php/Wicd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">arch的wiki</a>
+</p>
+<ol>
+<li>
+<code>pacman -S wicd</code>
+
+<li>
+<code>pacman -S dhclient wpa_supplicant hicolor-icon-theme</code>
+
+<li>
+
+<pre class="brush: bash">
+编辑/etc/rc.conf, 在network前加! 并添加wicd 
+在~/.xinitrc 添加启动wicd客户端 
+wicd-client &amp;
+重启X 如 # rc.d restart slim
+</pre>
+
+</ol>
+<h3 id="toc_0.2.2">电源管理</h3>
+<pre class="brush: bash">
+sudo pacman -S gnome-power-manager
+sudo pacman -S gnome-control-center
+在~/.xinitrc 添加启动
+gnome-power-manager &amp;
+</pre>
+<p>
+安装挂起
+</p>
+<pre class="brush: bash">
+sudo pacman -S pm-utils
+在/etc/sudoers加入:
+%wheel ALL = (ALL) NOPASSWD: /usr/sbin/pm-suspend
+</pre>
+<p>
+普通用户使用关机重启支持
+</p>
+<pre class="brush: bash">
+在/etc/sudoers加入:
+%wheel ALL = (ALL) NOPASSWD: /sbin/reboot
+%wheel ALL = (ALL) NOPASSWD: /sbin/halt
+</pre>
+<p>
+加入awesome菜单
+</p>
+<pre class="brush: bash">
+mysysmenu = {
+   { "suspend", terminal .. " -e sudo pm-suspend" },
+   { "reboot", terminal .. " -e sudo reboot" },
+   { "halt", terminal .. " -e sudo halt" },
+}
+</pre>
+<h3 id="toc_0.2.3">输入法 ibus</h3>
+<p>
+参考<a href="https://wiki.archlinux.org/index.php/Ibus">arch的wiki</a>
+</p>
+<ol>
+<li>
+<code>pacman -S ibus ibus-pinyin ibus-anthy</code>
+
+<li>
+
+<pre class="brush: bash">
+在~/.xinitrc 添加启动wicd客户端
+export LANG=zh_CN.UTF-8
+export LC_ALL="zh_CN.UTF-8"
+ibus-daemon -d -x -r -n awesome
+</pre>
+
+<li>
+urxvt下使用ibus:
+<pre class="brush: bash">
+在 .Xdefaults 添加
+  URxvt.inputMethod: ibus
+  URxvt.preeditType: OnTheSpot,None 
+</pre>
+
+</ol>
+<h3 id="toc_0.2.4">各种乱码</h3>
+<p>
+参考<a href="https://wiki.archlinux.org/index.php/Arch_Linux_%E4%B8%AD%E6%96%87%E5%8C%96_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">arch的wiki</a>
+</p>
+<ul>
+<li>
+vim乱码:
+<pre class="brush: bash">
+使用gvim代替vim
+并在.vimrc添加
+set fileencodings=utf8,cp936,gb18030,big5 
+</pre>
+
+</ul>
+<h2 id="toc_0.3">技巧</h2>
+<ul>
+<li>
+查看最近安装的软件: <code>cat /var/log/pacman.log|grep installed |tail</code>
+
+<li>
+urxvt的复制粘贴: 
+<pre class="brush: bash">
+从urxvt复制: 选中即复制
+粘贴到其他程序: 用鼠标中键粘贴, 粘贴到vim也一样 +寄存器无效
+粘贴到urxvt: 中键
+*即urxvt的剪贴板不是一般X剪贴板而是鼠标中键*
+</pre>
+
+</ul>
+<h3 id="toc_0.3.1">urxvt配色</h3>
+<p>
+在.Xdefaults中添加 <strong>需图</strong>
+</p>
+<pre class="brush: bash">
+URxvt.background:#2e3436
+URxvt.foreground:#d3d7cf
+URxvt.color0:#2e3436
+URxvt.color1:#cc0000
+URxvt.color2:#4e9a06
+URxvt.color3:#c4a000
+URxvt.color4:#3465a4
+URxvt.color5:#75507b
+URxvt.color6:#06989a
+URxvt.color7:#d3d7cf
+URxvt.color8:#555753
+URxvt.color9:#ef2929
+URxvt.color10:#8ae234
+URxvt.color11:#fce94f
+URxvt.color12:#729fcf
+URxvt.color13:#ad7fa8
+URxvt.color14:#34e2e2
+URxvt.color15:#eeeeec
+</pre>
+<h3 id="toc_0.3.2">更改slim主题</h3>
+<ul>
+<li>
+主题下载: <a href="http://slim.berlios.de/themes01.php">http://slim.berlios.de/themes01.php</a>
+
+<li>
+解压后放入 /usr/share/slim/themes
+
+<li>
+修改 /etc/slim.conf : 修改 current_theme 为新主题名
+
+</ul>
+<h3 id="toc_0.3.3">查看窗口CLASS等信息</h3>
+<p>
+yaourt xprop,运行xprop,点击需要查看的窗口
+</p>
+<h3 id="toc_0.3.4">截屏</h3>
+<p>
+在rc.lua的"Key bindings"处添加
+<code>    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/pic/shot/ 2&gt;/dev/null'") end),</code>
+</p>
+<h3 id="toc_0.3.5">安装 Virtualbox</h3>
+<p>
+安装对应的kernel headers
+如提示没有libGLU.so,安装 freeglut
+Virtualbox-管理-设定-Extensions里安装extension
+</p>
+<h3 id="toc_0.3.6">flash</h3>
+<ol>
+<li>
+<code>pacman -Sy flashplugin</code>
+
+<li>
+开启/etc/adobe/mms.cfg里的<code>EnableLinuxHWVideoDecode=1</code>
+
+</ol>
+<h3 id="toc_0.3.7">获取最快源</h3>
+<pre class="brush: bash">
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak2
+pacman -S reflector
+reflector -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+</pre>
+
+<!-- disqus -->
+<script type="text/javascript" src="disqus.js"></script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+<script type="text/javascript" src="sh/js/jquery-1.4.2.js"></script>
+<!-- SyntaxHighlighter -->
+<script type="text/javascript" src="sh/src/shCore.js"></script>
+<script type="text/javascript" src="sh/src/shAutoloader.js"></script>
+<link type="text/css" rel="stylesheet" href="sh/styles/shCore.css" />
+<link type="text/css" rel="Stylesheet" href="sh/styles/shCoreDefault.css" />
+<link type="text/css" rel="Stylesheet" href="sh/styles/shThemeDefault.css" />
+<script type="text/javascript" src="sh.js"></script>
+</body>
+</html>

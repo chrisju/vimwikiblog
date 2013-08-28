@@ -1,0 +1,57 @@
+* svn list PATH
+* svn mkdir -m "msg" PATH
+* svn import -m "msg" [LOCAL_DIR] PATH
+* svnclone = svn clone --localtime
+* svnup = svn rebase --localtime
+* svncommit = svn dcommit --localtime
+ 
+* stty -ixon 设置后可以使用Ctrl+s作为Ctrl+r的反向
+* zsh使用alt+_作为alt+.的反向搜索 在zshrc里加入
+  {{{
+insert-last-word-r () {
+  zle insert-last-word -- 1
+}
+zle -N insert-last-word-r
+bindkey "\e_" insert-last-word-r
+  }}}
+
+* :windo e! 强制刷新所有窗口的文件
+* /searchword\c 搜索忽略大小写
+* vim 竖行递增递减 ^v :I [http://vim.sourceforge.net/scripts/script.php?script_id=670 VisIncr插件]
+* vim +N dpy.c  打开文件并跳转到第N行
+* renamer.vim  批量改名 :Ren进入编辑文件夹模式 编辑完再次使用:Ren应用更改
+* 编辑远程文件 `vim scp://username@host//path/to/somefile`
+ 
+* pkg-config --modversion gtk+-2.0 查看包版本信息
+* 查看最近安装的软件包
+  {{{class="brush: bash"
+cat  /var/log/apt/history.log |grep "\sinstall\s" |tail
+  }}}
+ 
+
+* git commit --amend #修改上次提交 和上次提交使用一个ID
+* git reset --hard [commitid] #回退到某版本
+* git revert [commitid] #撤销某次提交 也会作为一次提交
+* 下载旧版本文件
+  {{{class="brush: bash"
+git co [commitid] [file]
+使用...
+git co HEAD [file]
+  }}}
+* 切回以前版本的完整流程
+  {{{class="brush: bash"
+git co -b tmp
+使用...
+git co master #具体看原来是啥
+git branch -D tmp 
+  }}}
+* git 找回丢失的stash 如手贱stash clear
+  {{{class="brush: bash"
+  在.git目录下运行如下命令
+for ref in `find .git/objects | sed -e 's#.git/objects/##' | grep / | tr -d /`; do if [ `git cat-file -t $ref` = "commit" ]; then git show --summary $ref; fi; done | less
+  搜索stash对应的commit, 可找到需要的stash的commitid
+  }}}
+* `git diff ver1 ver2 | (cd path && patch -p1)` 打patch
+
+
+* make -B  强制重新编译
