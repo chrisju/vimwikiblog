@@ -1,4 +1,6 @@
+== company公司 ==
 * 安装中文字体： 直接copy windows/fonts下的字体文件到~/.fonts下即OK
+=== gtk-sharp ===
 * 安装gtk-sharp环境 mono libgtk2.0-dev gtk-sharp2
 * 透明窗口需打开设置管理器中xfwm的use-compositing开关
 * 转换字符串为i18n调用字符串: `s/"\(\<.\{-}\>\)"/Catalog.GetString("\1")/g`
