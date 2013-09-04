@@ -3,13 +3,27 @@ vimwikiblog
 
 主要是为博客添加评论和代码高亮
 
-> in ~/.vimrc:
-    let g:vimwiki_list = [{
-    \ 'path': '/mnt/DATA/wiki/wiki/',
-    \ 'path_html': '/mnt/DATA/wiki/html/',
-    \ 'template_path': '/mnt/DATA/wiki/config/',
-    \ 'template_default': 'zz',
-    \ 'template_ext': '.tpl',
-    \ 'css_name': 'style0.css',
-    \ 'auto_export': 1,}]
+### ~/.vimrc配置
+        " 使用鼠标映射
+        let g:vimwiki_use_mouse = 1
+        
+        " 不要将驼峰式词组作为 Wiki 词条
+        let g:vimwiki_camel_case = 0
+        
+        let g:vimwiki_list = [{
+        \ 'path': '/mnt/DATA/vimwiki/wiki/',
+        \ 'path_html': '/mnt/DATA/vimwiki/html/',
+        \ 'template_path': '/mnt/DATA/vimwiki/config/',
+        \ 'template_default': 'zz',
+        \ 'template_ext': '.tpl',
+        \ 'css_name': 'style0.css',
+        \ 'auto_export': 1,},{
+        \ 'path': '/mnt/DATA/wiki/',
+        \ 'path_html': '/mnt/DATA/vimwiki/html/',
+        \ 'template_path': '/mnt/DATA/vimwiki/config/',
+        \ 'template_default': 'zz',
+        \ 'template_ext': '.tpl',
+        \ 'css_name': 'style0.css',
+        \ 'auto_export': 1,}]
+
 
