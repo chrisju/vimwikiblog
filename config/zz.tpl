@@ -6,13 +6,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=%encoding%">
 </head>
 <body>
-%content%
-
-<!-- disqus -->
-<script type="text/javascript" src="%root_path%site/js/disqus.js"></script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-<script type="text/javascript" src="%root_path%site/sh/js/jquery-1.4.2.js"></script>
+<div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">伊谢尔伦的一角</a>
+          <ul class="nav">
+            <li><a href="/archive.html">Archive</a></li>
+            <li><a href="/categories.html">Categories</a></li>
+            <li><a href="/tags.html">Tags</a></li>
+            <li><a href="/music.html">I♥like</a></li>
+            <li><a href="/links.html">Links</a></li>
+            <li><a href="/about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+</div>
+<div class="content">
+    %content%
+</div>
 <!-- SyntaxHighlighter -->
 <script type="text/javascript" src="%root_path%site/sh/src/shCore.js"></script>
 <script type="text/javascript" src="%root_path%site/sh/src/shAutoloader.js"></script>
@@ -20,10 +31,15 @@
 <link type="text/css" rel="Stylesheet" href="%root_path%site/sh/styles/shCoreDefault.css" />
 <link type="text/css" rel="Stylesheet" href="%root_path%site/sh/styles/shThemeDefault.css" />
 <script type="text/javascript" src="%root_path%site/js/sh.js"></script>
-
+<div class="container">
+<!-- disqus -->
+<script type="text/javascript" src="%root_path%site/js/disqus.js"></script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script type="text/javascript" src="%root_path%site/sh/js/jquery-1.4.2.js"></script>
 <footer>
         <p>© chris zz 2013 with help from <a href="http://www.vim.org/scripts/script.php?script_id=2226">vimwiki</a>
         </p>
 </footer>
+</div>
 </body>
 </html>

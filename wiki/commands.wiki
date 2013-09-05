@@ -1,3 +1,9 @@
+== commands ==
+*Fri, 06 Sep 2013 14:58:37 +0800*
+[[linux]]
+`shell`
+`bash`
+----
 * 显示内存中的字符串
   `sudo dd if=/dev/mem | cat | strings`
 * Rip audio from a video file.

@@ -17,10 +17,12 @@ bindkey "\e_" insert-last-word-r
 
 * :windo e! 强制刷新所有窗口的文件
 * /searchword\c 搜索忽略大小写
-* vim 竖行递增递减 ^v :I [http://vim.sourceforge.net/scripts/script.php?script_id=670 VisIncr插件]
 * vim +N dpy.c  打开文件并跳转到第N行
-* renamer.vim  批量改名 :Ren进入编辑文件夹模式 编辑完再次使用:Ren应用更改
 * 编辑远程文件 `vim scp://username@host//path/to/somefile`
+* :r !date -R 插入shell命令执行结果到当前光标
+* renamer.vim  批量改名插件 :Ren进入编辑文件夹模式 编辑完再次使用:Ren应用更改
+* EnhCommentify.vim 注释插件 cp即安装完毕 默认快捷键`\x`
+* vim 竖行递增递减 ^v :I [http://vim.sourceforge.net/scripts/script.php?script_id=670 VisIncr插件]
  
 * pkg-config --modversion gtk+-2.0 查看包版本信息
 * 查看最近安装的软件包
