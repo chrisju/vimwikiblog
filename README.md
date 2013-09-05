@@ -27,3 +27,11 @@ vimwikiblog
         \ 'auto_export': 1,}]
 
 
+### TODO
+> css布局,增加必要元素:header,分类,tag,上下篇
+> 外链处理
+> 首页
+> tag页,分类页,存档页
+> 文章时间
+> 文章的tag,分类链接
+> 页面其它元素
