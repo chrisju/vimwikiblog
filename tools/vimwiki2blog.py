@@ -4,7 +4,7 @@
 import sys
 import os
 import getopt
-import re
+from outlink import *
 
 wiki_dir = './wiki'
 html_dir = './html'
@@ -16,15 +16,11 @@ def usage():
     print(sys.argv[0]+' [-w wikidir] [-i htmldir] [-o blogdir]')
 
 
-def makelinkout(file):
-    '''使http,https,mailto等外部链接在新页面打开'''
-    pattern = '^M?M?M?(CM|CD|D?C?C?C?)$'
-
-
 def wiki2blog(file):
 
     #外链新标签打开
-    makelinkout(file)
+    print(blog_dir)
+    makelinkout(file, blog_dir)
 
     #move tag, category, time and so on to right
 
