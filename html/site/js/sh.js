@@ -29,6 +29,7 @@ SyntaxHighlighter.autoloader.apply(null, path(
             'php                    @shBrushPhp.js',
             'text plain             @shBrushPlain.js',
             'py python              @shBrushPython.js',
+            'lua                    @shBrushLua.js',
             'ruby rails ror rb      @shBrushRuby.js',
             'sass scss              @shBrushSass.js',
             'scala                  @shBrushScala.js',
