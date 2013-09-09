@@ -25,9 +25,6 @@
 <div class="span8">
     %content%
 </div>
-<div class="span4">
-Fri, 06 Sep 2013 16:16:30 +0800
-</div>
 </div>
 <script type="text/javascript" src="%root_path%site/sh/js/jquery-1.4.2.js"></script>
 <!-- SyntaxHighlighter -->
