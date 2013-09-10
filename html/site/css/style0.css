@@ -18,7 +18,7 @@ footer p {
 html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
 a:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
 a:hover,a:active{outline:0;}
-body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;color:#333333;}
+body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;color:#333333;background-color:#ffffff;}
 a{color:#0088cc;text-decoration:none;}
 a:hover{color:#005580;text-decoration:underline;}
 [class*="span"]{float:left;margin-left:20px;}
@@ -34,7 +34,7 @@ a:hover{color:#005580;text-decoration:underline;}
 .span10{width:780px;}
 .span11{width:860px;}
 .span12,.container{width:940px;}
-.container,.content{width:1040px;margin-left:auto;margin-right:auto;*zoom:1;}
+.container,.content{width:840px;margin-left:auto;margin-right:auto;*zoom:1;}
 .container:before,.container:after{display:table;content:"";}
 .container:after{clear:both;}
 .content:after{clear:both;}
