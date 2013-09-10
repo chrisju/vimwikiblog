@@ -18,6 +18,17 @@
             <li><a href="/links.html">Links</a></li>
             <li><a href="/about.html">About</a></li>
           </ul>
+          <form method="get" target="_blank" action="http://www.google.com/search">
+            <p>
+            <input name="q" type="text">
+            <input name="btnG" value="Google" type="submit">
+            <input name="ie" value="UTF-8" type="hidden">
+            <input name="oe" value="UTF-8" type="hidden">
+            <input name="hl" value="zh-CN" type="hidden">
+            <input name="domains" value="zzbalabala.com" type="hidden">
+            <input name="sitesearch" value="zzbalabala.com" type="hidden">
+            </p>
+          </form>
         </div>
       </div>
 </div>
