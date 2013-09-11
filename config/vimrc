@@ -9,6 +9,10 @@ let g:vimwiki_camel_case = 0
 " 切换列表项的开关（选中/反选）原始为C-Space,易冲突 改为T(shift+t)
 :map <S-t> <Plug>VimwikiToggleListItem
 
+" 用F5和Shift-F5生成html
+map <S-F5> :VimwikiAll2HTML<cr>
+map <F5> :Vimwiki2HTML<cr>
+
 let g:vimwiki_list = [{
 \ 'path': '/mnt/DATA/vimwiki/wiki/',
 \ 'path_html': '/mnt/DATA/vimwiki/html/',
