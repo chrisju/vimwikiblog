@@ -6,7 +6,7 @@ $(document).ready(function () {
 function path() {
     var args = arguments, result = [];
     for (var i = 0; i < args.length; i++)
-        result.push(args[i].replace('@', 'site/sh/scripts/'));
+        result.push(args[i].replace('@', '../site/sh/scripts/'));
     return result
 };
 

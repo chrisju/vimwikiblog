@@ -1,0 +1,52 @@
+== Linux 命令 ==
+* 记录命令耗时: `time`后接原命令, 如 `time find .`
+* 进制转换 16->10 printf %d 0x4e00
+* 进制转换 10->16 printf %x 19782
+* 查看进程内存使用情况 `cat /proc/[pid]/statm`
+* 查看端口占用情况 `netstat -ntlp|grep 46989`
+* 在多个文件中替换文本
+  {{{class="brush: bash"
+  sed -i "s/MyUtil\.Fav/Fav/g" `grep -rl "MyUtil.Fav" ./`
+  }}}
+* 查看so函数名列表 `nm -D libluandroid.so`
+* pkg-config --modversion gtk+-2.0 查看包版本信息
+* 显示内存中的字符串
+  `sudo dd if=/dev/mem | cat | strings`
+* Rip audio from a video file.
+  `mplayer -ao pcm -vo null -vc dummy -dumpaudio -dumpfile <output-file> <input-file>`
+* 杀死占用文件或文件系统的进程们
+  `fuser -k [filename|filesystem]`
+* 把文件名中的空格替换为_
+  `rename 'y/ /_/' *`
+* 查找相同文件,基于文件大小和md5
+  `find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate`
+* 录制屏幕
+  `ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg`
+=== apt ===
+* 查找命令所在包: `dpkg -S [cmd]` 可配合 `dpkg -l|grep [cmd]`
+* pkg-config --modversion gtk+-2.0 查看包版本信息
+* 查看linux内置程序源码
+  {{{class="brush: bash"
+  进入准备存放源码的文件夹
+  sudo apt-get install dpkg-dev
+  apt-get source coreutils
+  就会在当前文件夹看到源码文件夹
+  }}}
+* 查看最近安装的软件包
+  {{{class="brush: bash"
+cat  /var/log/apt/history.log |grep "\sinstall\s" |tail
+  }}}
+
+=== 查看硬件信息 ===
+* 主板 `dmidecode|less` 找到`Base Board`块
+* CPU `cat /proc/cpuinfo|grep 'model name'`
+* CPU位长 `cat /proc/cpuinfo|grep flags`
+  {{{class="brush: bash"
+  如果找到lm, 则说明你的CPU是64位的. lm是long mode的意思.
+  Long Mode - 64位CPU
+  Real Mode - 16位CPU
+  Protected Mode - 32位CPU
+  }}}
+* 内存 `cat /proc/meminfo |grep MemTotal`
+* 硬盘 `cat /proc/scsi/scsi`
+* 显卡 `lspci |grep VGA`

@@ -1,59 +1,25 @@
+== svn ==
+* svn log -l4           显示最近4条log
+* svn log -v -r 430     显示430版本改动的文件
+* svn diff -r 430:431   显示430和431的详细改动.可指定文件
+* svn copy SRC DST -m "message"     创建分支或tag
 * svn list PATH
 * svn mkdir -m "msg" PATH
 * svn import -m "msg" [LOCAL_DIR] PATH
-* svnclone = svn clone --localtime
-* svnup = svn rebase --localtime
-* svncommit = svn dcommit --localtime
- 
-* stty -ixon 设置后可以使用Ctrl+s作为Ctrl+r的反向
-* zsh使用alt+_作为alt+.的反向搜索 在zshrc里加入
+* svn回滚库
   {{{class="brush: bash"
-insert-last-word-r () {
-  zle insert-last-word -- 1
-}
-zle -N insert-last-word-r
-bindkey "\e_" insert-last-word-r
+  在当前项目工作目录执行：
+  svn merge -r HEAD:26803[要回滚到的版本号] trunk的url 
+  合并后无提示再提交代码 
   }}}
 
-* :windo e! 强制刷新所有窗口的文件
-* /searchword\c 搜索忽略大小写
-* vim +N dpy.c  打开文件并跳转到第N行
-* 编辑远程文件 `vim scp://username@host//path/to/somefile`
-* :r !date -R 插入shell命令执行结果到当前光标
-* renamer.vim  批量改名插件 :Ren进入编辑文件夹模式 编辑完再次使用:Ren应用更改
-* EnhCommentify.vim 注释插件 cp即安装完毕 默认快捷键`\x`
-* vim 竖行递增递减 ^v :I [http://vim.sourceforge.net/scripts/script.php?script_id=670 VisIncr插件]
- 
-* pkg-config --modversion gtk+-2.0 查看包版本信息
-* 查看最近安装的软件包
-  {{{class="brush: bash"
-cat  /var/log/apt/history.log |grep "\sinstall\s" |tail
-  }}}
- 
 
-* git commit --amend #修改上次提交 和上次提交使用一个ID
-* git reset --hard [commitid] #回退到某版本
-* git revert [commitid] #撤销某次提交 也会作为一次提交
-* 下载旧版本文件
-  {{{class="brush: bash"
-git co [commitid] [file]
-使用...
-git co HEAD [file]
-  }}}
-* 切回以前版本的完整流程
-  {{{class="brush: bash"
-git co -b tmp
-使用...
-git co master #具体看原来是啥
-git branch -D tmp 
-  }}}
-* git 找回丢失的stash 如手贱stash clear
-  {{{class="brush: bash"
-  在.git目录下运行如下命令
-for ref in `find .git/objects | sed -e 's#.git/objects/##' | grep / | tr -d /`; do if [ `git cat-file -t $ref` = "commit" ]; then git show --summary $ref; fi; done | less
-  搜索stash对应的commit, 可找到需要的stash的commitid
-  }}}
-* `git diff ver1 ver2 | (cd path && patch -p1)` 打patch
-
-
-* make -B  强制重新编译
+=== svn 使用注意事项 ===
+* 经常update (不要让自己的代码落后于版本库太多,容易冲突,最好落后不要超过1天,如果一天没有提交了,那就先update一下,在最新的基础上修改
+* 如果本地没有有意义的改动,与版本库同步前先revert
+* 尽量不要在别处改了再复制到svn控制的代码中,要直接在svn的代码里改,不然容易盖掉别人的修改
+* 一个功能的修改,尽量放在一次提交里,分开的话下了中间的版本就无法编译运行,要尽量减少无法运行版本
+* 提交前要update (否则无法提交
+* 提交前一定要仔细比较待提交的每行修改,确保正确(除非这个文件别人不会编辑),尽量不要有测试性的代码
+* 提交前一定要对最后的代码编译运行,在比较后更改代码后要重新编译运行,要尽量去除编译的warning (我们的项目有2个要编译的:CBTest和GoldMiner2
+* 提交时一定要好好写日志记录,方便查看
