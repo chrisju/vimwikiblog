@@ -1,10 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import sys
 import os
 import getopt
-from outlink import *
+from wiki2blog import *
+from genpages import *
 
 wiki_dir = './wiki'
 html_dir = './html'
@@ -14,29 +15,6 @@ def usage():
     print('根据vimwiki的结果,修改并生成blog所需相关文件')
     print('usage:')
     print(sys.argv[0]+' [-w wikidir] [-i htmldir] [-o blogdir]')
-
-
-def wiki2blog(file):
-
-    #外链新标签打开
-    print(blog_dir)
-    makelinkout(file, blog_dir)
-
-    #move tag, category, time and so on to right
-
-    #添加上下篇
-    pass
-
-
-def genhtmls(htmls):
-    '''
-    第一个<p>和</p>之间
-    <strong>内是时间
-    <a> 第一个是分类,后面都是tag
-    可以考虑不用a,用标记彻底区分类别和tag
-    '''
-
-    pass
 
 
 if __name__ == '__main__':
@@ -80,5 +58,5 @@ if __name__ == '__main__':
         wiki2blog(v)
 
     #生成tag,分类,存档页面
-    genhtmls(html)
+    genpages(html)
 

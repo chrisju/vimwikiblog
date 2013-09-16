@@ -1,6 +1,7 @@
 %nohtml
 = BUG =
   * [ ] BUG
+    * [ ] disqus loding position
 = TODO =
   * [.] TODO
     * [.] toolchain

@@ -1,3 +1,7 @@
+"快捷插入文章信息
+":map <F2> <ESC>gg:read !date '+\%Y-\%m-\%d \%H:\%M:\%S'<CR>
+:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR
+
 " ######### Vimwiki 写作助手 ######### "
 
 " 使用鼠标映射

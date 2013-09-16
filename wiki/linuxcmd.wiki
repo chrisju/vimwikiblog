@@ -1,4 +1,10 @@
 == Linux 命令 ==
+*2013-06-23 16:50:58*
+_linux_
+`shell`
+`linux`
+----
+%toc
 * 记录命令耗时: `time`后接原命令, 如 `time find .`
 * 进制转换 16->10 printf %d 0x4e00
 * 进制转换 10->16 printf %x 19782
