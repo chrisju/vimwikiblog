@@ -20,7 +20,7 @@ def usage():
 if __name__ == '__main__':
 
     try:
-        opts,args = getopt.getopt(sys.argv[1:], "io")
+        opts,args = getopt.getopt(sys.argv[1:], "wio")
         for opt,arg in opts:
             if opt == '-w':
                 wiki_dir = arg
@@ -32,11 +32,9 @@ if __name__ == '__main__':
         usage()
         sys.exit(2)
 
-    print(wiki_dir)
-    print(html_dir)
-    print(blog_dir)
+    print('dirs:',wiki_dir,html_dir,blog_dir)
 
-    #遍历.wiki生成的html
+    # 获取有效html(有对应wiki文件的)
     wiki = {}
     for root,dirs,files in os.walk(wiki_dir):
         for f in files:
@@ -49,14 +47,22 @@ if __name__ == '__main__':
     for root,dirs,files in os.walk(html_dir):
         for f in files:
             a = os.path.splitext(f)
-            if a[1] == '.html' and wiki.has_key(a[0]):
+            # 只保存有对应wiki的html
+            if a[1] == '.html' and a[0] in wiki:
                 path = os.path.join(root, f)
                 html[a[0]] = path
+    # 净化wiki,去除没有对应html的wiki文件
+    for k,v in wiki.items():
+        if not k in html:
+            wiki.pop(k)
+
+    # 获取文章属性(时间,分类,tag)
+    attrs=getattrs(wiki)
+
+    #生成tag,分类,存档页面
+    genpages(html,attrs)
 
     for k,v in html.items():
         print(k,v)
-        wiki2blog(v)
-
-    #生成tag,分类,存档页面
-    genpages(html)
+        wiki2blog(v,attrs)
 

@@ -12,9 +12,9 @@
         <div class="container">
           <a class="brand" href="/">伊谢尔伦的一角</a>
           <ul class="nav">
-            <li><a href="/archive.html">Archive</a></li>
-            <li><a href="/categories.html">Categories</a></li>
-            <li><a href="/tags.html">Tags</a></li>
+            <li><a href="Archive.html">Archive</a></li>
+            <li><a href="Categories.html">Categories</a></li>
+            <li><a href="Tags.html">Tags</a></li>
             <li><a href="/music.html">I♥like</a></li>
             <li><a href="/links.html">Links</a></li>
             <li><a href="/about.html">About</a></li>

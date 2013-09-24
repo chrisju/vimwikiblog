@@ -19,6 +19,20 @@ class Attr:
         self.tags = tags
         self.title = title
 
+
+def isvimwikibloghead(s):
+
+    # 每行都只会是以下几种情况
+    p=r'(^\*.+?\*$)|(^_.+?_$)|(^`.+?`$)'
+    for line in s.splitlines():
+        if not re.search(p,line.strip()):
+            return False
+    # 日期必须有,分类不能大于一个
+    if len(re.findall(r'\*(.+?)\*',s)) != 1 or len(re.findall(r'_(.+?)_',s)) > 1:
+        return False
+    return True
+
+
 def getwikiattr(wikifile):
 
     a = Attr()
@@ -26,15 +40,14 @@ def getwikiattr(wikifile):
     s=fin.read()
     fin.close()
 
-    p=r'==\s+?(.+?)\s+?=='
+    p=r'==\s+?(.+?)\s+?==\s*'
     if re.search(p,s):
         a.title=re.search(p,s).group(1)
     p = p + r'(.+?)(----|%toc|===)'
     m=re.search(p,s,re.DOTALL)
     if m:
         s=m.group(2)
-        # TODO 需要精确判断
-        if len(re.findall(r'\*(.+?)\*',s)) == 1 and len(re.findall(r'_(.+?)_',s)) <= 1:
+        if isvimwikibloghead(s):
             p=r'\*(.+?)\*' # ==1
             if re.search(p,s):
                 timestr=re.search(p,s).group(1)
@@ -99,7 +112,21 @@ def savetag(sar):
     fout.close()
 
 
-def genpages(htmldict=None):
+def getattrs(wikidict=None):
+    attrs = {}
+    if wikidict:
+        for k,v in wikidict.items():
+            attrs[k] = getwikiattr(v)
+    else:
+        for root,dirs,files in os.walk(wiki_dir):
+            for f in files:
+                a = os.path.splitext(f)
+                if a[1] == '.wiki':
+                    path = os.path.join(root, f)
+                    attrs[a[0]] = getwikiattr(path)
+    return attrs
+
+def genpages(htmldict=None,attrs=None):
     '''
     生成首页
     生成存档页
@@ -110,19 +137,8 @@ def genpages(htmldict=None):
     '''
 
     # 获取所有页面的时间,分类,tag数据
-    attrs = {}
-    if htmldict:
-        for k,v in htmldict.items():
-            f = wiki_dir + k + '.wiki'
-            attrs[k] = getwikiattr(f)
-    else:
-        for root,dirs,files in os.walk(wiki_dir):
-            for f in files:
-                a = os.path.splitext(f)
-                if a[1] == '.wiki':
-                    path = os.path.join(root, f)
-                    attrs[a[0]] = getwikiattr(path)
-
+    if not attrs:
+        attrs = getattrs()
     # 生成archive
     mons=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月',]
     s=''
@@ -146,7 +162,9 @@ def genpages(htmldict=None):
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = os.path.join(blog_dir,k+'.html')
+            path = wiki+'.html'
+            if htmldict:
+                path = htmldict[wiki]
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
@@ -162,14 +180,16 @@ def genpages(htmldict=None):
         dcat[v.cat].append(k)
     for k,v in sorted(dcat.items()):
         print(k,len(v),v)
-        s = s + str.format('<h3>{0}</h3>\n', k)
+        s = s + str.format('<h3 id="{0}">{0}</h3>\n', k)
         s = s + '<ul>\n'
         v.sort(key=lambda p:attrs[p].time,reverse=True)
         for wiki in v:
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = os.path.join(blog_dir,k+'.html')
+            path = wiki+'.html'
+            if htmldict:
+                path = htmldict[wiki]
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
@@ -187,14 +207,16 @@ def genpages(htmldict=None):
                 dcat[tag].append(k)
     for k,v in sorted(dcat.items()):
         print(k,len(v),v)
-        s = s + str.format('<h3>{0}</h3>\n', k)
+        s = s + str.format('<h3 id="{0}">{0}</h3>\n', k)
         s = s + '<ul>\n'
         v.sort(key=lambda p:attrs[p].time,reverse=True)
         for wiki in v:
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = os.path.join(blog_dir,k+'.html')
+            path = wiki+'.html'
+            if htmldict:
+                path = htmldict[wiki]
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
