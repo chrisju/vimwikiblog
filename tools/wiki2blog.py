@@ -20,20 +20,13 @@ def isvimwikibloghead(s):
         return False
     return True
 
-def dealcatandtag(file, outdir=None, attrs=None):
+def dealcatandtag(s, attrs=None):
     '''
     给分类和tag添加链接
     <strong>内是时间
     <em> 是分类,<code>是tag
     '''
 
-    global blog_dir
-    if outdir != None:
-        blog_dir = outdir
-    outfile = os.path.join(blog_dir, os.path.split(file)[1])
-    fin=open(file,'r')
-    fout=open(outfile,'w')
-    s=fin.read()
     sout=''
     p=r'(^.*?<h2.*?>)(.+?)(</h2>.*?)'
     p=p+r'(<p>\s*)(.+?)(\s*<div class="toc">|\s*<h)(.+?)$'
@@ -43,7 +36,6 @@ def dealcatandtag(file, outdir=None, attrs=None):
         if isvimwikibloghead(s2):
             sout = m.group(1)+m.group(2)+m.group(3)+m.group(4)
             # 重写文章属性栏 给分类和tag加上链接
-            # TODO 传入分类和tag的统计数据
             sout = sout + '<ul class="tag_box inline">\n'
             p=r'<strong>(.+?)</strong>'
             if re.search(p,s2):
@@ -71,24 +63,38 @@ def dealcatandtag(file, outdir=None, attrs=None):
             sout = sout + m.group(6)+m.group(7)
     if not sout:
         sout = s
-    fout.write(sout)
-    fin.close()
-    fout.close()
+    return sout
 
 def addprevandnext(file, outdir=None):
     pass
 
-def wiki2blog(file,attrs=None):
-    print(blog_dir)
+def wiki2blog(file,attrs=None,indir=None,outdir=None):
+    global html_dir
+    global blog_dir
+    if indir:
+        html_dir = indir
+    if outdir:
+        blog_dir = outdir
+    fin=open(file,'r')
+    s=fin.read()
+    fin.close()
 
     #外链新标签打开
-    makelinkout(file, blog_dir)
+    s = makelinkout(s)
 
     #修饰tag, category, time
-    dealcatandtag(file, blog_dir, attrs)
+    s = dealcatandtag(s, attrs)
 
-    #添加上下篇
+    # TODO 添加上下篇
     #addprevandnext(file, blog_dir)
+
+    outfile = file.replace(html_dir,blog_dir)
+    dir = os.path.split(outfile)[0]
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    fout=open(outfile,'w')
+    fout.write(s)
+    fout.close()
 
 
 if __name__ == '__main__':

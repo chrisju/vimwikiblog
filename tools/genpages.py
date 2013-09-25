@@ -63,6 +63,8 @@ def getwikiattr(wikifile):
         a.cat = '未分类'
     if not a.title:
         a.title = os.path.splitext(wikifile)[0]
+    if not a.tags:
+        a.tags = []
     return a
 
 
@@ -126,7 +128,7 @@ def getattrs(wikidict=None):
                     attrs[a[0]] = getwikiattr(path)
     return attrs
 
-def genpages(htmldict=None,attrs=None):
+def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
     '''
     生成首页
     生成存档页
@@ -136,6 +138,12 @@ def genpages(htmldict=None,attrs=None):
     注意: 开头需满足一定格式
     '''
 
+    global html_dir
+    global blog_dir
+    if indir:
+        html_dir = indir
+    if outdir:
+        blog_dir = outdir
     # 获取所有页面的时间,分类,tag数据
     if not attrs:
         attrs = getattrs()
@@ -164,11 +172,10 @@ def genpages(htmldict=None,attrs=None):
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = wiki+'.html'
             if htmldict:
-                path = htmldict[wiki]
+                path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
-    print(s)
     savearchive(s)
 
     # 生成分类
@@ -189,11 +196,10 @@ def genpages(htmldict=None,attrs=None):
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = wiki+'.html'
             if htmldict:
-                path = htmldict[wiki]
+                path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
-    print(s)
     savecat(s)
 
     # 生成Tag
@@ -216,11 +222,10 @@ def genpages(htmldict=None,attrs=None):
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = wiki+'.html'
             if htmldict:
-                path = htmldict[wiki]
+                path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
-    print(s)
     savetag(s)
 
 

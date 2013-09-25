@@ -7,20 +7,21 @@ import sys
 
 blog_dir = './blog'
 
-def makelinkout(file, outdir=None):
+def makelinkout(s):
     '''使http,https,mailto等外部链接在新页面打开'''
-    global blog_dir
-    if outdir != None:
-        blog_dir = outdir
-    outfile = os.path.join(blog_dir, os.path.split(file)[1])
-    fin=open(file,'r')
-    fout=open(outfile,'w')
-    s=fin.read()
     s=re.sub(r'(<a href=".+?//.+?")(>)',r'\1 target="_blank">',s)
-    fout.write(s)
-    fin.close()
-    fout.close()
+    return s
 
 
 if __name__ == '__main__':
-    makelinkout(sys.argv[1])
+    file=sys.argv[1]
+    fin=open(file,'r')
+    s=fin.read()
+    fin.close()
+
+    s = makelinkout(s)
+
+    outfile = os.path.join(blog_dir, os.path.split(file)[1])
+    fout=open(outfile,'w')
+    fout.write(s)
+    fout.close()

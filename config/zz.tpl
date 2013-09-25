@@ -9,7 +9,7 @@
 <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/">伊谢尔伦的一角</a>
+          <a class="brand" href=".">伊谢尔伦的一角</a>
           <ul class="nav">
             <li><a href="Archive.html">Archive</a></li>
             <li><a href="Categories.html">Categories</a></li>
