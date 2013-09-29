@@ -5,6 +5,7 @@ import re
 import os
 import sys
 import time
+import shutil
 
 wiki_dir = './wiki'
 blog_dir = './blog'
@@ -82,6 +83,8 @@ def savearchive(sar):
     fout.write(s)
     fin.close()
     fout.close()
+    indexfile = os.path.join(blog_dir, 'index.html')
+    shutil.copyfile(outfile,indexfile)
 
 def savecat(sar):
 

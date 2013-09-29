@@ -1,19 +1,19 @@
 %nohtml
 = BUG =
-  * [ ] BUG
-    * [ ] disqus loding position
+  * [X] BUG
+    * [X] disqus loding position
 = TODO =
   * [.] TODO
-    * [.] toolchain
-      * [.] 调整原页面
+    * [O] toolchain
+      * [o] 调整原页面
         * [X] 外链处理
         * [ ] 上下篇
-        * [ ] 分类,tag,时间
-      * [ ] 首页
-      * [ ] 分类页
-      * [ ] tag页
-    * [ ] style
-      * [ ] 目录
+        * [X] 分类,tag,时间
+      * [X] 首页
+      * [X] 分类页
+      * [X] tag页
+    * [o] style
+      * [X] 目录
       * [ ] 美化
     * [ ] 博客内容移植
     

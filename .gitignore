@@ -1,3 +1,4 @@
-tmp/
-*.html
-html/res/
+/tmp/
+/res/
+/html/
+/blog/
