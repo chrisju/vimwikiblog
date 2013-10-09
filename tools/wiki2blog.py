@@ -85,9 +85,9 @@ def addprevandnext(name, s, attrs=None):
     nextname = ''
     isnext = False
     if attrs:
-        print(name)
+        #print(name)
         for k,v in sorted(attrs.items(), key=lambda p:p[1].time):
-            print(k,v.title,v.time)
+            #print(k,v.title,v.time)
             if isnext:
                 nextname = k
                 break;
@@ -95,7 +95,7 @@ def addprevandnext(name, s, attrs=None):
                 isnext = True
             else:
                 lastname = k
-    #print('prev&next:',lastname,nextname)
+    print('prev&next:',lastname,nextname)
     #input()
 
     sprev = ''

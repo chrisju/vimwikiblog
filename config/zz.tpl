@@ -14,9 +14,9 @@
             <li><a href="Archive.html">Archive</a></li>
             <li><a href="Categories.html">Categories</a></li>
             <li><a href="Tags.html">Tags</a></li>
-            <li><a href="/music.html">I♥like</a></li>
-            <li><a href="/links.html">Links</a></li>
-            <li><a href="/about.html">About</a></li>
+            <li><a href="ILike.html">I♥like</a></li>
+            <li><a href="Links.html">Links</a></li>
+            <li><a href="About.html">About</a></li>
           </ul>
           <form method="get" target="_blank" action="http://www.google.com/search">
             <p>
