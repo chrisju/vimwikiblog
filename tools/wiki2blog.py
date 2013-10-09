@@ -65,8 +65,53 @@ def dealcatandtag(s, attrs=None):
         sout = s
     return sout
 
-def addprevandnext(file, outdir=None):
-    pass
+def addprevandnext(name, s, attrs=None):
+    sformat = '''
+    <hr>
+    <div class="pagination">
+      <ul>
+        {0}
+        <li><a href="Archive.html">Archive</a></li>
+        {1}
+      </ul>
+    </div>
+    <hr>'''
+    format_prev='<li class="prev"><a href="{0}" title="{1}">&larr; Previous</a></li>'
+    format_next='<li class="next"><a href="{0}" title="{1}">Next &rarr;</a></li>'
+    noprev='<li class="prev disabled"><a>&larr; Previous</a></li>'
+    nonext='<li class="next disabled"><a>Next &rarr;</a>'
+    p=r'<!-- disqus -->'
+    lastname = ''
+    nextname = ''
+    isnext = False
+    if attrs:
+        print(name)
+        for k,v in sorted(attrs.items(), key=lambda p:p[1].time):
+            print(k,v.title,v.time)
+            if isnext:
+                nextname = k
+                break;
+            if k == name:
+                isnext = True
+            else:
+                lastname = k
+    #print('prev&next:',lastname,nextname)
+    #input()
+
+    sprev = ''
+    snext = ''
+    if lastname:
+        sprev = format_prev.format(lastname+'.html', attrs[lastname].title)
+    else:
+        sprev = noprev
+    if nextname:
+        snext = format_next.format(nextname+'.html', attrs[nextname].title)
+    else:
+        snext = nonext
+
+    news = sformat.format(sprev,snext)
+    sout = re.sub(p,news,s,flags=re.DOTALL)
+    return sout
 
 def wiki2blog(file,attrs=None,indir=None,outdir=None):
     global html_dir
@@ -85,8 +130,9 @@ def wiki2blog(file,attrs=None,indir=None,outdir=None):
     #修饰tag, category, time
     s = dealcatandtag(s, attrs)
 
-    # TODO 添加上下篇
-    #addprevandnext(file, blog_dir)
+    # 添加上下篇
+    name = os.path.splitext(os.path.basename(file))[0]
+    s = addprevandnext(name, s, attrs)
 
     outfile = file.replace(html_dir,blog_dir)
     dir = os.path.split(outfile)[0]
