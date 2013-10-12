@@ -3,7 +3,7 @@
   * [X] BUG
     * [X] disqus loding position
 = TODO =
-  * [o] TODO
+  * [.] TODO
     * [X] toolchain
       * [X] 调整原页面
         * [X] 外链处理
@@ -12,7 +12,7 @@
       * [X] 首页
       * [X] 分类页
       * [X] tag页
-      * [ ] 去除love_内容
+      * [X] 去除love_内容
     * [.] style
       * [X] 目录
       * [ ] 基本CSS
@@ -21,7 +21,9 @@
         * [ ] 时间
         * [ ] 分类
         * [ ] tag
+        * [ ] disqus加载条显示在右边的bug
       * [ ] 美化
     * [ ] 博客内容移植
     * [ ] 时间调整
+    * [ ] 仅自动上传改动的文件
     
