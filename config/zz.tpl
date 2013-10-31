@@ -49,7 +49,7 @@
 <link type="text/css" rel="Stylesheet" href="%root_path%../site/sh/styles/shThemeDefault.css" />
 <script type="text/javascript" src="%root_path%../site/js/sh.js"></script>
 <footer>
-        <p>© chris zz 2013 with help from <a href="http://www.vim.org/scripts/script.php?script_id=2226">vimwiki</a>
+        <p>© chris zz 2013 powered by <a href="https://github.com/chrisju/vimwikiblog">vimwikiblog</a>
         </p>
 </footer>
 </body>

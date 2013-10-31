@@ -1,9 +1,10 @@
 %nohtml
 = BUG =
-  * [X] BUG
-    * [X] disqus loding position
+  * [ ] BUG
+    * [ ] disqus加载条显示在右边的bug
+    * [ ] 上一页的箭头显示在右边的bug
 = TODO =
-  * [o] TODO
+  * [O] TODO
     * [X] toolchain
       * [X] 调整原页面
         * [X] 外链处理
@@ -13,18 +14,16 @@
       * [X] 分类页
       * [X] tag页
       * [X] 去除love_内容
-    * [.] style
+    * [o] style
       * [X] 目录
-      * [ ] 基本CSS
-        * [ ] 目录
-        * [ ] 上下篇
-        * [ ] 时间
-        * [ ] 分类
-        * [ ] tag
-        * [ ] disqus加载条显示在右边的bug
-        * [ ] 上一页的箭头显示在右边的bug
+      * [O] 基本CSS
+        * [X] 目录
+        * [X] 上下篇
+        * [X] 时间
+        * [X] 分类
+        * [X] tag
       * [ ] 美化
-    * [ ] 博客内容移植
+    * [X] 博客内容移植
     * [X] 时间调整
-    * [ ] 仅自动上传改动的文件
+    * [X] 仅自动上传改动的文件
     
