@@ -131,7 +131,7 @@ if __name__ == '__main__':
         for name in rms:
             print('removing:', name)
             os.remove(os.path.join(blog_dir,name))
-            # TODO 清理空文件夹
+            # TODO 清理空文件夹 包括blog_tmp
 
         # 清理blog_tmp
         for root,dirs,files in os.walk(blog_tmp):

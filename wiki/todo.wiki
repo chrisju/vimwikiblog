@@ -1,8 +1,8 @@
 %nohtml
 = BUG =
-  * [ ] BUG
-    * [ ] disqus加载条显示在右边的bug
-    * [ ] 上一页的箭头显示在右边的bug
+  * [X] BUG
+    * [X] disqus加载条显示在右边的bug
+    * [X] 上一页的箭头显示在右边的bug
 = TODO =
   * [O] TODO
     * [X] toolchain

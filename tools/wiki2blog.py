@@ -67,8 +67,8 @@ def dealcatandtag(s, attrs=None):
 
 def addprevandnext(name, s, attrs=None):
     sformat = '''
-    <hr>
-    <div class="pagination">
+    <hr style="clear:both">
+    <div class="pagination" style="float:left;">
       <ul>
         {0}
         <li><a href="Archive.html">Archive</a></li>
