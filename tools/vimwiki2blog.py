@@ -9,36 +9,57 @@ from genpages import *
 import ftp
 import filecmp
 import shutil as sh
+import json
 
 wiki_dir = './wiki'
 html_dir = './html'
 blog_dir = './blog'
 blog_tmp = './blog_tmp'
 
-def usage():
-    print('根据vimwiki的结果,修改并生成blog所需相关文件')
-    print('usage:')
-    print(sys.argv[0]+' [-w wikidir] [-i htmldir] [-o blogdir]')
-
 if __name__ == '__main__':
 
     usage = '根据vimwiki的结果,修改并生成blog所需相关文件 \n%prog -h for help'
     parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-w","--wiki",dest="wiki",default=wiki_dir,help="wiki dir. default:"+wiki_dir,metavar="PATH")
-    parser.add_option("-i","--html",dest="html",default=html_dir,help="wiki output dir, has origin html. default:"+html_dir,metavar="PATH")
-    parser.add_option("-o","--out",dest="blog",default=blog_dir,help="blog files output dir. default:"+blog_dir,metavar="PATH")
-    parser.add_option("","--tmp",dest="blog_tmp",default=blog_tmp,help="changed blog files dir. default:"+blog_tmp,metavar="PATH")
-    parser.add_option("-u","",action="store_true",dest="upload",default=False,help="upload to server. need set parameters in ftp.py")
-    parser.add_option("","--notmp",action="store_true",dest="notmp",default=False,help="not use tmp dir, will not figer out changed files and can't upload")
+    parser.add_option("-c","--config-file",dest="cfg",default='~/.vimwikiblog.json',help="config file. default is ~/.vimwikiblog.json",metavar="FILE")
+    parser.add_option("-u",action="store_true",dest="uploadonly",help="only upload files in blog_tmp")
     (options,args )= parser.parse_args()
 
-    wiki_dir = os.path.abspath(options.wiki)
-    html_dir = os.path.abspath(options.html)
-    blog_dir = os.path.abspath(options.blog)
-    blog_tmp = os.path.abspath(options.blog_tmp)
+    print('config file:',options.cfg)
+    with open(os.path.expanduser(options.cfg)) as f:
+        j = json.load(f)
+
+    wiki_dir = j['basic']['wiki']
+    html_dir = j['basic']['html']
+    blog_dir = j['basic']['blog']
+    blog_tmp = j['basic']['blog_tmp']
+    uploads = j['upload']
+
+    if options.uploadonly:
+        # 上传blog_tmp的内容
+        if os.path.exists(blog_tmp):
+            adds=[]
+            for root,dirs,files in os.walk(blog_tmp):
+                for name in files:
+                    f = os.path.relpath(os.path.join(root,name),blog_tmp)
+                    adds.append(f)
+            # 提交更改到远程
+            uploaded = False
+            for up in uploads:
+                if up['enable']:
+                    uploaded = True
+                    if up['type'] == 'ftp':
+                        print('uploading to %s ...' % (up['host']))
+                        ftp.update(up,blog_tmp,adds)
+            # 删除blog_tmp
+            if uploaded:
+                print('removing:', blog_tmp)
+                os.system('rm -rf '+ blog_tmp)
+        sys.exit(0)
+
+    # 准备文件夹
     if not os.path.exists(blog_dir):
         os.makedirs(blog_dir)
-    if options.notmp:
+    if not blog_tmp:
         blog_tmp = blog_dir
     else:
         if os.path.exists(blog_tmp):
@@ -88,7 +109,7 @@ if __name__ == '__main__':
         print('  ',k,v)
         wiki2blog(v,attrs,html_dir,blog_tmp)
 
-    if not options.notmp:
+    if blog_dir != blog_tmp:
         # 比较与原始blog的差别
         diffs=[]
         adds=[]
@@ -129,8 +150,9 @@ if __name__ == '__main__':
                     os.makedirs(dir)
             sh.copyfile(os.path.join(blog_tmp,name),os.path.join(blog_dir,name))
         for name in rms:
-            print('removing:', name)
-            os.remove(os.path.join(blog_dir,name))
+            file = os.path.join(blog_dir,name)
+            print('removing:', file)
+            os.remove(file)
             # TODO 清理空文件夹 包括blog_tmp
 
         # 清理blog_tmp
@@ -140,11 +162,16 @@ if __name__ == '__main__':
                 if name not in changed:
                     os.remove(os.path.join(blog_tmp,name))
 
-        if options.upload:
-            # 提交更改到远程
-            print('uploading...')
-            ftp.update(blog_tmp,adds+diffs,rms)
-            # 删除blog_tmp
+        # 提交更改到远程
+        uploaded = False
+        for up in uploads:
+            if up['enable']:
+                uploaded = True
+                if up['type'] == 'ftp':
+                    print('uploading to %s ...' % (up['host']))
+                    ftp.update(up,blog_tmp,adds+diffs,rms)
+        # 删除blog_tmp
+        if uploaded:
             print('removing:', blog_tmp)
             os.system('rm -rf '+ blog_tmp)
 

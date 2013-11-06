@@ -1,0 +1,35 @@
+{
+    "REDME":[
+    "can copy me to ~/.vimwikiblog.json or use -c to specify"
+    "wiki: wiki dir, won't change",
+    "html: wiki's outputdir, won't change",
+    "blog: blog dir, output dir",
+    "blog_tmp: store changed(compare with old blog dir) files, must not exist. if empty will not upload"
+        ],
+    "basic": {
+        "wiki":"./wiki",
+        "html":"./wiki_html",
+        "blog":"./blog",
+        "blog_tmp":"./blog_tmp"
+        },
+    "upload": [
+    {
+        "enable":true,
+        "type":"ftp",
+        "host":"",
+        "port": 21,
+        "remote_dir": "/domains/zzbalabala.com/public_html/blog/",
+        "user":"",
+        "pwd":""
+        },
+    {
+        "enable":false,
+        "type":"ftp",
+        "host":"xxx.com",
+        "port": 21,
+        "remote_dir": "/domains/zzbalabala.com/public_html/wiki/html",
+        "user":"",
+        "pwd":""
+        }
+    ]
+}

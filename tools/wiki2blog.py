@@ -95,7 +95,7 @@ def addprevandnext(name, s, attrs=None):
                 isnext = True
             else:
                 lastname = k
-    print('prev&next:',lastname,nextname)
+    #print('prev&next:',lastname,nextname)
     #input()
 
     sprev = ''
