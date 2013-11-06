@@ -11,10 +11,6 @@ import filecmp
 import shutil as sh
 import json
 
-wiki_dir = './wiki'
-html_dir = './html'
-blog_dir = './blog'
-blog_tmp = './blog_tmp'
 
 if __name__ == '__main__':
 
@@ -162,16 +158,17 @@ if __name__ == '__main__':
                 if name not in changed:
                     os.remove(os.path.join(blog_tmp,name))
 
-        # 提交更改到远程
-        uploaded = False
-        for up in uploads:
-            if up['enable']:
-                uploaded = True
-                if up['type'] == 'ftp':
-                    print('uploading to %s ...' % (up['host']))
-                    ftp.update(up,blog_tmp,adds+diffs,rms)
-        # 删除blog_tmp
-        if uploaded:
-            print('removing:', blog_tmp)
-            os.system('rm -rf '+ blog_tmp)
+        if changed:
+            # 提交更改到远程
+            uploaded = False
+            for up in uploads:
+                if up['enable']:
+                    uploaded = True
+                    if up['type'] == 'ftp':
+                        print('uploading to %s ...' % (up['host']))
+                        ftp.update(up,blog_tmp,adds+diffs,rms)
+            # 删除blog_tmp
+            if uploaded:
+                print('removing:', blog_tmp)
+                os.system('rm -rf '+ blog_tmp)
 

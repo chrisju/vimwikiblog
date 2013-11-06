@@ -7,8 +7,6 @@ import sys
 import time
 import shutil
 
-wiki_dir = './wiki'
-blog_dir = './blog'
 archivetpl = 'config/genpage.tpl'
 
 class Attr:
@@ -117,21 +115,13 @@ def savetag(sar):
     fout.close()
 
 
-def getattrs(wikidict=None):
+def getattrs(wikidict):
     attrs = {}
-    if wikidict:
-        for k,v in wikidict.items():
-            attrs[k] = getwikiattr(v)
-    else:
-        for root,dirs,files in os.walk(wiki_dir):
-            for f in files:
-                a = os.path.splitext(f)
-                if a[1] == '.wiki':
-                    path = os.path.join(root, f)
-                    attrs[a[0]] = getwikiattr(path)
+    for k,v in wikidict.items():
+        attrs[k] = getwikiattr(v)
     return attrs
 
-def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
+def genpages(htmldict,attrs,indir,outdir):
     '''
     生成首页
     生成存档页
@@ -143,13 +133,8 @@ def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
 
     global html_dir
     global blog_dir
-    if indir:
-        html_dir = indir
-    if outdir:
-        blog_dir = outdir
-    # 获取所有页面的时间,分类,tag数据
-    if not attrs:
-        attrs = getattrs()
+    html_dir = indir
+    blog_dir = outdir
     # 生成archive
     mons=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月',]
     s=''
@@ -173,9 +158,7 @@ def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = wiki+'.html'
-            if htmldict:
-                path = os.path.relpath(htmldict[wiki], html_dir)
+            path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
@@ -197,9 +180,7 @@ def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = wiki+'.html'
-            if htmldict:
-                path = os.path.relpath(htmldict[wiki], html_dir)
+            path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
@@ -223,9 +204,7 @@ def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
             a=attrs[wiki]
             format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
-            path = wiki+'.html'
-            if htmldict:
-                path = os.path.relpath(htmldict[wiki], html_dir)
+            path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
             s = s + str.format(format, date, path, title)
         s = s + '</ul>\n'
@@ -234,6 +213,26 @@ def genpages(htmldict=None,attrs=None,indir=None,outdir=None):
 
 
 if __name__ == '__main__':
-    genpages()
+    wiki_dir = './wiki'
+    html_dir = './wiki_html'
+    blog_dir = './blog'
+    blog_tmp = './blog_tmp'
+    wiki={}
+    for root,dirs,files in os.walk(wiki_dir):
+        for f in files:
+            a = os.path.splitext(f)
+            if a[1] == '.wiki':
+                path = os.path.join(root, f)
+                wiki[a[0]]=path
+    html = {}
+    for root,dirs,files in os.walk(html_dir):
+        for f in files:
+            a = os.path.splitext(f)
+            if a[1] == '.html':
+                path = os.path.join(root, f)
+                wiki[a[0]]=path
+    attrs = getattrs(wiki)
+    # gen html
+    genpages(html,attrs,html_dir,blog_tmp)
 
 

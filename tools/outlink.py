@@ -5,7 +5,6 @@ import re
 import os
 import sys
 
-blog_dir = './blog'
 
 def makelinkout(s):
     '''使http,https,mailto等外部链接在新页面打开'''
@@ -14,6 +13,7 @@ def makelinkout(s):
 
 
 if __name__ == '__main__':
+    blog_dir = './blog'
     file=sys.argv[1]
     fin=open(file,'r')
     s=fin.read()

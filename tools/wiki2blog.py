@@ -6,7 +6,6 @@ import os
 import sys
 from outlink import *
 
-blog_dir = './blog'
 
 def isvimwikibloghead(s):
 
@@ -20,7 +19,7 @@ def isvimwikibloghead(s):
         return False
     return True
 
-def dealcatandtag(s, attrs=None):
+def dealcatandtag(s, attrs):
     '''
     给分类和tag添加链接
     <strong>内是时间
@@ -65,7 +64,7 @@ def dealcatandtag(s, attrs=None):
         sout = s
     return sout
 
-def addprevandnext(name, s, attrs=None):
+def addprevandnext(name, s, attrs):
     sformat = '''
     <hr style="clear:both">
     <div class="pagination" style="float:left;">
@@ -113,13 +112,11 @@ def addprevandnext(name, s, attrs=None):
     sout = re.sub(p,news,s,flags=re.DOTALL)
     return sout
 
-def wiki2blog(file,attrs=None,indir=None,outdir=None):
+def wiki2blog(file,attrs,indir,outdir):
     global html_dir
     global blog_dir
-    if indir:
-        html_dir = indir
-    if outdir:
-        blog_dir = outdir
+    html_dir = indir
+    blog_dir = outdir
     fin=open(file,'r')
     s=fin.read()
     fin.close()
@@ -144,5 +141,7 @@ def wiki2blog(file,attrs=None,indir=None,outdir=None):
 
 
 if __name__ == '__main__':
-    wiki2blog(sys.argv[1])
+    blog_dir = './blog'
+    html_dir = './html'
+    wiki2blog(sys.argv[1],None,html_dir,blog_tmp)
 
