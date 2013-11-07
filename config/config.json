@@ -1,12 +1,14 @@
 {
     "REDME":[
     "can copy me to ~/.vimwikiblog.json or use -c to specify"
+    "gentpl":"templete of navigate pages,like Archive.html and Tags.html",
     "wiki: wiki dir, won't change",
     "html: wiki's outputdir, won't change",
     "blog: blog dir, output dir",
     "blog_tmp: store changed(compare with old blog dir) files, must not exist. if empty will not upload"
         ],
     "basic": {
+        "gentpl":"config/genpage.tpl",
         "wiki":"./wiki",
         "html":"./wiki_html",
         "blog":"./blog",

@@ -24,6 +24,7 @@ if __name__ == '__main__':
     with open(os.path.expanduser(options.cfg)) as f:
         j = json.load(f)
 
+    gentpl = j['basic']['gentpl']
     wiki_dir = j['basic']['wiki']
     html_dir = j['basic']['html']
     blog_dir = j['basic']['blog']
@@ -97,7 +98,7 @@ if __name__ == '__main__':
 
     # 生成tag,分类,存档页面
     print('generate pages...')
-    genpages(html,attrs,html_dir,blog_tmp)
+    genpages(gentpl,html,attrs,html_dir,blog_tmp)
 
     # 转换页面适应blog
     print('convert htmls...')

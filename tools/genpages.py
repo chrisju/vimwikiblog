@@ -7,7 +7,6 @@ import sys
 import time
 import shutil
 
-archivetpl = 'config/genpage.tpl'
 
 class Attr:
 
@@ -121,7 +120,7 @@ def getattrs(wikidict):
         attrs[k] = getwikiattr(v)
     return attrs
 
-def genpages(htmldict,attrs,indir,outdir):
+def genpages(gentpl,htmldict,attrs,indir,outdir):
     '''
     生成首页
     生成存档页
@@ -131,8 +130,10 @@ def genpages(htmldict,attrs,indir,outdir):
     注意: 开头需满足一定格式
     '''
 
+    global archivetpl
     global html_dir
     global blog_dir
+    archivetpl = gentpl
     html_dir = indir
     blog_dir = outdir
     # 生成archive
@@ -233,6 +234,7 @@ if __name__ == '__main__':
                 wiki[a[0]]=path
     attrs = getattrs(wiki)
     # gen html
-    genpages(html,attrs,html_dir,blog_tmp)
+    gentpl = 'config/genpage.tpl'
+    genpages(gentpl,html,attrs,html_dir,blog_tmp)
 
 
