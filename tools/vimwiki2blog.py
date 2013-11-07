@@ -6,6 +6,7 @@ import os
 import optparse
 from wiki2blog import *
 from genpages import *
+from util import *
 import ftp
 import filecmp
 import shutil as sh
@@ -149,15 +150,15 @@ if __name__ == '__main__':
         for name in rms:
             file = os.path.join(blog_dir,name)
             print('removing:', file)
-            os.remove(file)
-            # TODO 清理空文件夹 包括blog_tmp
+            re_clean(file) # 删除文件 并递归清空空文件夹
+        os.makedirs(blog_dir,exist_ok=True) # 如果连blog_dir都被删了就补回来
 
         # 清理blog_tmp
         for root,dirs,files in os.walk(blog_tmp):
             for file in files:
                 name = os.path.relpath(os.path.join(root,file),blog_tmp)
                 if name not in changed:
-                    os.remove(os.path.join(blog_tmp,name))
+                    re_clean(os.path.join(blog_tmp,name))
 
         if changed:
             # 提交更改到远程

@@ -3,8 +3,26 @@
 
 from ftplib import FTP
 import socket
-import os
+import os,sys
 
+
+def re_clean(ftp,f):
+    '''
+    删除文件或文件夹 若删除后母文件夹为空 则删除母文件夹 递归执行
+    '''
+    try:
+        ftp.delete(f)
+    except:
+        pass
+    try:
+        ftp.rmd(f)
+    except:
+        pass
+    dir = os.path.split(f)[0]
+    if dir:
+        n = len(tuple(ftp.mlsd(path=dir)))
+        if n == 0:
+            re_clean(ftp,dir)
 
 def update(server,root,adds,rms=[]):
     '''
@@ -29,11 +47,7 @@ def update(server,root,adds,rms=[]):
             print('uploading %s...' % (name))
             ftp.storbinary('STOR %s' % name, f)
     for name in rms:
-        try:
-            ftp.delete(name)
-            # TODO 清理空文件夹
-        except:
-            print(str.format('delete {0} failed.',name))
+        re_clean(ftp,name)
 
     ftp.close()
 
@@ -47,4 +61,4 @@ server={
         }
 if __name__ == '__main__':
 
-    update(server,'/mnt/DATA/tmp',['hosts'],['abc'])
+    update(server,'/mnt/DATA/tmp',['hosts'],['t/adb.log'])
