@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     usage = '根据vimwiki的结果,修改并生成blog所需相关文件 \n%prog -h for help'
     parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-c","--config-file",dest="cfg",default='~/.vimwikiblog.json',help="config file. default is ~/.vimwikiblog.json",metavar="FILE")
+    parser.add_option("-c","--config-file",dest="cfg",default='~/.config/vimwikiblog/config.json',help="config file. default is ~/.config/vimwikiblog/config.json",metavar="FILE")
     parser.add_option("-u",action="store_true",dest="uploadonly",help="only upload files in blog_tmp")
     (options,args )= parser.parse_args()
 

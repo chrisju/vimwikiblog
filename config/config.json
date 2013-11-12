@@ -5,18 +5,18 @@
     "wiki: wiki dir, won't change",
     "html: wiki's outputdir, won't change",
     "blog: blog dir, output dir",
-    "blog_tmp: store changed(compare with old blog dir) files, must not exist. if empty will not upload"
+    "blog_tmp: store changed(compare with old blog dir) files, must not exist. if empty will not upload, recommend set to blog_tmp"
         ],
     "basic": {
         "gentpl":"config/genpage.tpl",
         "wiki":"./wiki",
         "html":"./wiki_html",
         "blog":"./blog",
-        "blog_tmp":"./blog_tmp"
+        "blog_tmp":""
         },
     "upload": [
     {
-        "enable":true,
+        "enable":false,
         "type":"ftp",
         "host":"",
         "port": 21,
