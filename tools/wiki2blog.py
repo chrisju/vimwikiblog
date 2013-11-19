@@ -75,10 +75,8 @@ def addprevandnext(name, s, attrs):
       </ul>
     </div>
     <hr>'''
-    format_prev='<li class="prev"><a href="{0}" title="{1}">&larr; Previous</a></li>'
-    format_next='<li class="next"><a href="{0}" title="{1}">Next &rarr;</a></li>'
-    noprev='<li class="prev disabled"><a>&larr; Previous</a></li>'
-    nonext='<li class="next disabled"><a>Next &rarr;</a>'
+    format_prev='<li class="prev"><a href="{0}" title="上一篇: {1}">&larr; {1}</a></li>'
+    format_next='<li class="next"><a href="{0}" title="下一篇: {1}">{1} &rarr;</a></li>'
     p=r'<!-- disqus -->'
     lastname = ''
     nextname = ''
@@ -101,12 +99,8 @@ def addprevandnext(name, s, attrs):
     snext = ''
     if lastname:
         sprev = format_prev.format(lastname+'.html', attrs[lastname].title)
-    else:
-        sprev = noprev
     if nextname:
         snext = format_next.format(nextname+'.html', attrs[nextname].title)
-    else:
-        snext = nonext
 
     news = sformat.format(sprev,snext)
     sout = re.sub(p,news,s,flags=re.DOTALL)
