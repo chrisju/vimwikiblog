@@ -10,6 +10,16 @@ footer p {
   text-align: center; /* center align it with the container */
 }
 
+table, td, th
+{
+  border:1px solid green;
+}
+th
+{
+  background-color:#ffc0c0;
+  color:black;
+}
+
 /* 去掉syntaxhighlighter上的小问号 */
 .syntaxhighlighter .toolbar { display: none; }
 
@@ -149,3 +159,36 @@ pre code{padding:0;color:inherit;background-color:transparent;border:0;}
 .navbar .nav .active>.dropdown-toggle:hover{color:#ffffff;}
 .navbar .nav.pull-right .dropdown-menu{left:auto;right:0;}.navbar .nav.pull-right .dropdown-menu:before{left:auto;right:12px;}
 .navbar .nav.pull-right .dropdown-menu:after{left:auto;right:13px;}
+
+/* tag_box ======================================================== */
+
+.tag_box {
+	list-style:none;
+	margin:0;
+	padding:5px 0 ;
+	overflow:hidden;
+}
+.tag_box li {
+	line-height:28px;
+}
+.tag_box.inline li {
+	float:left;
+}
+.tag_box a {
+	padding: 3px 6px;
+	margin: 2px;
+	background: #eee;
+	color:#005F6B;
+	border-radius: 3px;
+	text-decoration:none;
+}
+.tag_box a span{
+/*    vertical-align:super;*/
+	color:#f05FfB;
+	font-size:0.8em;
+}
+.tag_box a.active {
+	background:#57A957;
+	border:1px solid #4C964D;
+	color:#FFF;
+}

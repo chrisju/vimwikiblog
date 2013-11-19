@@ -39,7 +39,7 @@ def dealcatandtag(s, attrs):
             p=r'<strong>(.+?)</strong>'
             if re.search(p,s2):
                 timestr=re.search(p,s2).group(1)
-                sout = sout + str.format('<li>{0}</li>\n',timestr.split()[0])
+                sout = sout + str.format('<li><a href="Archive.html">{0}</a></li>\n',timestr.split()[0])
             p=r'<em>(.+?)</em>'
             if re.search(p,s2):
                 cat=re.search(p,s2).group(1)
