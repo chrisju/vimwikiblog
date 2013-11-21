@@ -192,3 +192,8 @@ pre code{padding:0;color:inherit;background-color:transparent;border:0;}
 	border:1px solid #4C964D;
 	color:#FFF;
 }
+a.pos_right
+{
+position:relative;
+left:20px
+}

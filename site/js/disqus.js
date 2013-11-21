@@ -3,7 +3,7 @@
 document.write('<div id="disqus_thread"></div>');
 
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-var disqus_shortname = 'zzwiki'; // required: replace example with your forum shortname
+var disqus_shortname = 'xxx'; // required: replace example with your forum shortname
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {

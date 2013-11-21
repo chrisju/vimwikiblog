@@ -40,8 +40,10 @@
 %string%
 </div>
 </div>
+<script type="text/javascript" src="%root_path%../site/js/ga.js"></script>
 <footer>
         <p>© chris zz 2013 with help from <a href="http://www.vim.org/scripts/script.php?script_id=2226">vimwiki</a>
+        <a class="pos_right" rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"></a>
         </p>
 </footer>
 </body>
