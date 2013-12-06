@@ -10,14 +10,14 @@
 <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href=".">伊谢尔伦的一角</a>
+          <a class="brand" href=".">Blog name</a>
           <ul class="nav">
             <li><a href="Archive.html">Archive</a></li>
             <li><a href="Categories.html">Categories</a></li>
             <li><a href="Tags.html">Tags</a></li>
-            <li><a href="/music.html">I♥like</a></li>
-            <li><a href="/links.html">Links</a></li>
-            <li><a href="/about.html">About</a></li>
+            <li><a href="const/ILike.html">I♥like</a></li>
+            <li><a href="const/Links.html">Links</a></li>
+            <li><a href="const/About.html">About</a></li>
           </ul>
           <form method="get" target="_blank" action="http://www.google.com/search">
             <p>
@@ -26,8 +26,8 @@
             <input name="ie" value="UTF-8" type="hidden">
             <input name="oe" value="UTF-8" type="hidden">
             <input name="hl" value="zh-CN" type="hidden">
-            <input name="domains" value="zzbalabala.com" type="hidden">
-            <input name="sitesearch" value="zzbalabala.com" type="hidden">
+            <input name="domains" value="xxx.com" type="hidden">
+            <input name="sitesearch" value="xxx.com" type="hidden">
             </p>
           </form>
         </div>
@@ -42,7 +42,7 @@
 </div>
 <script type="text/javascript" src="%root_path%../site/js/ga.js"></script>
 <footer>
-        <p>© chris zz 2013 with help from <a href="http://www.vim.org/scripts/script.php?script_id=2226">vimwiki</a>
+        <p>© xxx 2013 with help from <a href="http://www.vim.org/scripts/script.php?script_id=2226">vimwiki</a>
         <a class="pos_right" rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"></a>
         </p>
 </footer>

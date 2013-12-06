@@ -20,9 +20,15 @@ def re_clean(ftp,f):
         pass
     dir = os.path.split(f)[0]
     if dir:
-        n = len(tuple(ftp.mlsd(path=dir)))
-        if n == 0:
-            re_clean(ftp,dir)
+        try:
+            if sys.version > '3.3':
+                n=len(tuple(ftp.mlsd(path=dir)))
+            else:
+                n=len(ftp.nlst(dir))
+            if n == 0:
+                re_clean(ftp,dir)
+        except:
+            pass
 
 def update(server,root,adds,rms=[]):
     '''
@@ -42,7 +48,10 @@ def update(server,root,adds,rms=[]):
     for name in adds:
         dir = os.path.split(name)[0]
         if dir:
-            ftp.mkd(dir)
+            try:
+                ftp.mkd(dir)
+            except:
+                pass
         with open(os.path.join(root,name),'rb') as f:
             print('uploading %s...' % (name))
             ftp.storbinary('STOR %s' % name, f)
@@ -61,4 +70,4 @@ server={
         }
 if __name__ == '__main__':
 
-    update(server,'/mnt/DATA/tmp',['hosts'],['t/adb.log'])
+    update(server,'/mnt/DATA/tmp',['hosts'],['t/hosts'])

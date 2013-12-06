@@ -1,7 +1,7 @@
 {
-    "REDME":[
-    "can copy me to ~/.vimwikiblog.json or use -c to specify"
-    "gentpl":"templete of navigate pages,like Archive.html and Tags.html",
+    "README":[
+    "can copy me to ~/.vimwikiblog.json or use -c to specify",
+    "gentpl: templete of navigate pages,like Archive.html and Tags.html",
     "wiki: wiki dir, won't change",
     "html: wiki's outputdir, won't change",
     "blog: blog dir, output dir",
@@ -12,7 +12,7 @@
         "wiki":"./wiki",
         "html":"./wiki_html",
         "blog":"./blog",
-        "blog_tmp":""
+        "blog_tmp":"blog_tmp"
         },
     "upload": [
     {

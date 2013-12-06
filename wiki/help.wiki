@@ -1,0 +1,63 @@
+== vimwikiblog document ==
+*2013-12-04 17:57:43*
+_linux_
+`vimwiki`
+----
+%toc
+=== Introduction ===
+Vimwiki can transfer wiki files to html files. Use template, vimwiki can support commments and code highlight. If we do a little change to the html files, it can be used as a static blog.
+* vimwikiblog project: https://github.com/chrisju/vimwikiblog
+* example: http://blog.zzbalabala.com
+=== What does it do ===
+* Generate pages of Archive,Categories,Tags
+* Deal external links
+* Add prev page and next page
+* Auto update to blog server
+=== User guide ===
+# Download project from https://github.com/chrisju/vimwikiblog
+# Test
+  # configure .vimrc, add this:
+  {{{class="brush: bash"
+let g:vimwiki_list = [{
+\ 'path': '/path/to/vimwikiblog/wiki/',
+\ 'path_html': '/path/to/vimwikiblog/wiki_html/',
+\ 'template_path': '/path/to/vimwikiblog/config/',
+\ 'template_default': 'zz',
+\ 'template_ext': '.tpl',
+\ 'css_name': 'style0.css',
+\ 'auto_export': 1,}]
+  }}}
+  # `cd /path/to/vimwikiblog/`
+  # `vim wiki/help.wiki`, run `:VimwikiAll2HTML`
+  # `python3 tools/vimwikiblog.py`
+  # view files in `/path/to/vimwikiblog/blog/` with browser
+# ~/.vimrc setting<br>
+  Add this block to ~/.vimrc:
+  {{{class="brush: bash"
+:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR
+  }}}
+  You'd better set the time,category,tags for every page by using F2 in .wiki:<br>
+  * There must one time string (between '*')
+  * Category can be one or zero (between '_')
+  * Can add any number of tags (between '`')
+  * Must keep `----`
+  * `%toc` can be removed
+# vimwiki setting<br>
+  * Refer to `vimwikiblog/config/vimrc`, you should set template and css
+  * Template example:`vimwikiblog/config/zz.tpl`, *blog name and search domain must be changed*
+  * Css example:`vimwikiblog/site/css/style0.css`
+  * Deafult template has [http://disqus.com/ disqus comment] and [https://www.google.com/analytics Google analytics]. You must modify `vimwikiblog/site/js/disqus.js` and `vimwikiblog/site/js/ga,js` to set your own id
+# vimwikiblog config<br>
+  # Configure `vimwikiblog/config/config.json`
+    # For any path full path is recommended
+    # Set basic/gentpl. gentpl is for page Archive.html/Tags.html and so on. Example:`config/gen.tpl`. It is like vimwiki's template. *blog name and search domain must be changed*
+    # Set `basic/wiki` to your vimwiki dir
+    # Set `basic/html` to your vimwiki output dir
+    # Set `basic/blog` to your blog dir. And should copy `site/css/style0.css` to the dir. `vimwikiblog/blog` is recommended
+    # Set `basic/blog_tmp` to a dir not exist. Later you may need update the files under it to blog server manually
+    # Set `upload` section if need auto update to remote servers. *now only support ftp*
+  # Copy `vimwikiblog/config/config.json` to `~/.config/vimwikiblog/`
+# use
+  # `cd vimwikiblog/`
+  # `python3 tools/vimwikiblog.py`
+  # copy `site/` and `blog/` dir to your blog server

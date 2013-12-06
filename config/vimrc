@@ -19,7 +19,7 @@ map <F5> :Vimwiki2HTML<cr>
 
 let g:vimwiki_list = [{
 \ 'path': '/mnt/DATA/vimwiki/wiki/',
-\ 'path_html': '/mnt/DATA/vimwiki/html/',
+\ 'path_html': '/mnt/DATA/vimwiki/wiki_html/',
 \ 'template_path': '/mnt/DATA/vimwiki/config/',
 \ 'template_default': 'zz',
 \ 'template_ext': '.tpl',
