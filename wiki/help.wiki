@@ -29,7 +29,7 @@ let g:vimwiki_list = [{
   }}}
   # `cd /path/to/vimwikiblog/`
   # `vim wiki/help.wiki`, run `:VimwikiAll2HTML`
-  # `python3 tools/vimwikiblog.py`
+  # `python3 tools/vimwikiblog.py -c config/config.json`
   # view files in `/path/to/vimwikiblog/blog/` with browser
 # ~/.vimrc setting<br>
   Add this block to ~/.vimrc:
