@@ -1,28 +1,26 @@
 {
     "README":[
-    "can copy me to ~/.vimwikiblog.json or use -c to specify",
-    "gentpl: templete of navigate pages,like Archive.html and Tags.html",
-    "wiki: wiki dir, won't change",
-    "html: wiki's outputdir, won't change",
-    "blog: blog dir, output dir",
-    "blog_tmp: store changed(compare with old blog dir) files, must not exist. if empty will not upload, recommend set to blog_tmp"
+    "wiki: .wiki dir",
+    "html: vimwiki's outputdir",
+    "blog: blog dir, output dir, not change recomended",
+    "blog_tmp: store changed fies and ready to upload, not change recomended.(compare with old blog dir) files, must not exist. if empty will not upload"
         ],
     "basic": {
         "gentpl":"config/genpage.tpl",
-        "wiki":"./wiki",
-        "html":"./wiki_html",
+        "wiki":"/mnt/DATA/proj/wikiblog",
+        "html":"./html",
         "blog":"./blog",
-        "blog_tmp":"blog_tmp"
+        "blog_tmp":"./blog_tmp"
         },
     "upload": [
     {
         "enable":false,
         "type":"ftp",
-        "host":"",
+        "host":"blog.zzbalabala.com",
         "port": 21,
-        "remote_dir": "/domains/zzbalabala.com/public_html/blog/",
-        "user":"",
-        "pwd":""
+        "remote_dir": "/home/wwwroot/blog.zzbalabala.com/blog",
+        "user":"xxx",
+        "pwd":"xxx"
         },
     {
         "enable":false,
@@ -30,8 +28,9 @@
         "host":"xxx.com",
         "port": 21,
         "remote_dir": "/domains/zzbalabala.com/public_html/wiki/html",
-        "user":"",
-        "pwd":""
+        "user":"xxx",
+        "pwd":"xxx"
         }
     ]
 }
+

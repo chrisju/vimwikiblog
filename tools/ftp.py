@@ -46,15 +46,16 @@ def update(server,root,adds,rms=[]):
     ftp.cwd(server['remote_dir'])
 
     for name in adds:
-        dir = os.path.split(name)[0]
-        if dir:
-            try:
-                ftp.mkd(dir)
-            except:
-                pass
-        with open(os.path.join(root,name),'rb') as f:
-            print('uploading %s...' % (name))
-            ftp.storbinary('STOR %s' % name, f)
+        if not name.startswith('hide_'):
+            dir = os.path.split(name)[0]
+            if dir:
+                try:
+                    ftp.mkd(dir)
+                except:
+                    pass
+            with open(os.path.join(root,name),'rb') as f:
+                print('uploading %s...' % (name))
+                ftp.storbinary('STOR %s' % name, f)
     for name in rms:
         re_clean(ftp,name)
 

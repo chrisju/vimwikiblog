@@ -71,11 +71,11 @@ if __name__ == '__main__':
     wiki = {}
     for root,dirs,files in os.walk(wiki_dir):
         for f in files:
-            if not f.startswith('love_') and not root.endswith('private'):
-                a = os.path.splitext(f)
-                if a[1] == '.wiki':
-                    path = os.path.join(root, f)
-                    wiki[a[0]] = path
+            #if not f.startswith('love_') and not root.endswith('private'):
+            a = os.path.splitext(f)
+            if a[1] == '.wiki':
+                path = os.path.join(root, f)
+                wiki[a[0]] = path
     html = {}
     for root,dirs,files in os.walk(html_dir):
         for f in files:

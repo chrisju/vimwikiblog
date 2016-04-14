@@ -1,0 +1,42 @@
+== vimwikiblog document ==
+*2013-12-04 17:57:43*
+_linux_
+`vimwiki`
+----
+%toc
+=== Introduction ===
+* Project mainpage: https://github.com/chrisju/vimwikiblog
+* vimwikiblog is python3 tool.It can transfer wiki files to a static blog.After edit and save .wiki file,you can update the modification to your blog by one command.
+* Use this tool, only a little setting, you can convert your vimwiki files to be a blog. You can modify templates to fit your preference.
+* Blog example: http://blog.zzbalabala.com
+=== Vimwikiblog convention for .wiki ===
+* There is a convention to set time/category/tags for the article
+* In `~/.vimrc`, add shortcut for quickly insert convention   *Note the shortcut conflicts*
+{{{class="brush: bash"
+:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR>
+}}}
+
+* Open all .wiki files and press `F2` to insert the convention
+* Convention editing
+  * There must one time string (between '*')
+  * Category can be one or zero (between '_')
+  * Can add any number of tags (between '`'), one line for one tag
+  * Must keep `----`
+  * `%toc` will be converted to a direcory. this can be removed
+=== Usage ===
+# You must have knowledge with vimwiki
+# `git clone https://github.com/chrisju/vimwikiblog.git`
+# `cd vimwikiblog`
+# edit `~/.vimrc`,depend on `config/vimrc`, must add template_path,template_default,template_ext,css_name in `vimwiki_list`
+# edit `config/config.json` wiki,html under `base` is the wiki dir and vimwiki's output dir,you can set ftp account in `upload`
+# edit `vimwikiblog/config/vimwiki.tpl` and `vimwikiblog/config/generate.tpl`.Replace all `xxx` string with your own
+# Modify all .wiki files according to *vimwikiblog convention (important!!)*.thers are examples in vimwikiblog/wiki/
+# If first run, open wiki file with vim,type :VimwikiAll2HTML to convert all wiki files into html
+# `cd vimwikiblog`, and run `python3 tools/vimwiki2blog.py -c config/config.json`, will generate blog files in blog/ and upload to ftp(if configed), files in blog_tmp is the files modified but not uploaded, use `python3 tools/vimwiki2blog.py -c config/config.json -u` can upload them(argument '-u' means upload only)
+# Upload `site` directory to blog server, make sure that it is at the same directory with `blog`
+=== Advance ===
+* In `site/js/disqus.js` set `disqus_shortname` for disqus
+* Set `site/js/ga.js` for google-analytics
+* Modify style: `config/genpage.tpl`,`config/vimwiki.tpl`,`blog/style0.css` and files under site.genpage.tpl is the template of navigation pages,vimwiki.tpl is the template of vimwiki
+* Default config file:`~/.config/vimwikiblog/config.json`,if not use `-c` argument
+* You can add `alias upblog='cd /mnt/DATA/proj/vimwikiblog/;python3 tools/vimwiki2blog.py -c config/config.json'` into `~/.bashrc`

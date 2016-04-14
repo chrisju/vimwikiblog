@@ -1,16 +1,19 @@
 %nohtml
 = BUG =
-  * [X] BUG
+  * [o] BUG
     * [X] disqus加载条显示在右边的bug
     * [X] 上一页的箭头显示在右边的bug
     * [ ] 删除blog_dir中非生成html文件的问题
+    * [ ] 不重复上传上传成功了的文件
+    * [ ] 比较文件更改有bug,有相同文件被判断为已更改
 = TODO =
   * [o] TODO
-    * [X] toolchain
-      * [X] 调整原页面
+    * [o] toolchain
+      * [O] 调整原页面
         * [X] 外链处理
         * [X] 上下篇
         * [X] 分类,tag,时间
+        * [ ] 去掉时间
       * [X] 首页
       * [X] 分类页
       * [X] tag页

@@ -1,0 +1,46 @@
+== 用vimwiki写博客 ==
+*2013-11-07 18:09:29*
+_linux_
+`vimwiki`
+----
+%toc
+=== 简介 ===
+* 项目地址: https://github.com/chrisju/vimwikiblog
+* vimwikiblog是一个python3工具,用来将vimwiki转换成静态博客.工具对vimwiki生成的html进行修饰,生成导航页面,以及上传有改动的文件至博客主机.在修改保存.wiki文件后直接运行一个命令就能同步更改到博客上
+* 内置了博客模版,只要很简单的配置就能把你写的vimwikis转变成一个博客,如果对原始风格不满意可以自定义模版
+* Blog示例: http://blog.zzbalabala.com
+=== vimwikiblog约定 ===
+* 约定用来给文章设置时间,分类和tag
+* 在~/.vimrc中加入插入约定的快捷键 *注意快捷键冲突*
+{{{class="brush: bash"
+:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR>
+}}}
+* 用vim打开wiki文件并按F2在文件中插入约定
+* 编辑约定
+  * 时间(*之间的)必须有1个
+  * 分类(_之间的)为0或1个
+  * tag(`之间的)任意个(一个一行)
+  * `----`必须保留
+  * `%toc`那一行表示生成目录 不需要可以删掉
+=== 使用方法 ===
+# 本文假设你是vimwiki用户 若不是可以去这里入门: http://wiki.ktmud.com/tips/vim/vimwiki-guide.html
+# `git clone https://github.com/chrisju/vimwikiblog.git`
+# `cd vimwikiblog`
+# 编辑 `~/.vimrc`,参考`config/vimrc`, 必须添加template_path,template_default,template_ext,css_name等字段
+# 编辑`config/config.json` basic下的wiki,html分别对应wiki所在文件夹和vimwiki的html输出文件夹,upload中可以设置ftp帐号
+# 编辑 `vimwikiblog/config/vimwiki.tpl` 和 `vimwikiblog/config/generate.tpl`.以合适内容替换所有的`xxx`字符串
+# 按 *vimwikiblog约定(重要!!)* 编写wiki和对现有wiki文件进行改造.示例可以看vimwikiblog/wiki/文件夹下的.wiki文件
+# 若第一次使用,用vim打开wiki文件,使用:VimwikiAll2HTML将文件夹下所有wiki文件转为html
+# 进入vimwikiblog文件夹, 运行`python3 tools/vimwiki2blog.py -c config/config.json`, 会在blog下生成博客文件并上传到ftp(若配置有ftp), blog_tmp下是改动过的文件但未上传成功的文件, 可以使用`python3 tools/vimwiki2blog.py -c config/config.json -u`上传(添加-u表示仅上传)
+# 将 `site` 文件夹复制到博客主机中 与blog文件夹同级
+=== 详解 ===
+* 如果自定义了blog文件夹,需将`site/css/style0.css`复制到blog文件夹下
+* 在`site/js/disqus.js`设置`disqus_shortname`为你的disqus shortname以使用评论系统
+* 在`site/js/ga.js`设置google-analytics
+* 修改样式可以修改`config/genpage.tpl`,`config/vimwiki.tpl`,`blog/style0.css`和site下的文件.其中genpage.tpl是导航页模版文件,vimwiki.tpl是vimwiki的模版文件
+* 默认的配置文件是`~/.config/vimwikiblog/config.json` 复制过去就不需要用-c指定配置文件了
+* 运行时若提示 `blog_tmp` 已存在, 可以直接手动删除 `blog_tmp`文件夹
+* 要上传需要配置blog_tmp(默认配置即可),可以保存修改的文件,同步时可以只上传这些文件
+* 可以上传到多个服务器,enable设为true即打开上传开关,目前只支持ftp
+* 可以在~/.bashrc加上 `alias upblog='cd /mnt/DATA/proj/vimwikiblog/;python3 tools/vimwiki2blog.py -c config/config.json'`,这样在修改保存.wiki文件后直接`upblog`就能同步到博客上啦
+* 更多的就自己改代码吧 记住别把自己的ftp密码公开出来o(*^▽^*)o

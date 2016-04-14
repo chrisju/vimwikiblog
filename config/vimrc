@@ -1,6 +1,6 @@
 "快捷插入文章信息
 ":map <F2> <ESC>gg:read !date '+\%Y-\%m-\%d \%H:\%M:\%S'<CR>
-:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR
+:map <F2> <ESC>gg:read !echo -e "*`date '+\%Y-\%m-\%d \%H:\%M:\%S'`*\n_cat_\n\`tag\`\n----\n\%toc"<CR>
 
 " ######### Vimwiki 写作助手 ######### "
 
@@ -19,16 +19,16 @@ map <F5> :Vimwiki2HTML<cr>
 
 let g:vimwiki_list = [{
 \ 'path': '/mnt/DATA/vimwiki/wiki/',
-\ 'path_html': '/mnt/DATA/vimwiki/wiki_html/',
+\ 'path_html': '/mnt/DATA/vimwiki/html/',
 \ 'template_path': '/mnt/DATA/vimwiki/config/',
-\ 'template_default': 'zz',
+\ 'template_default': 'vimwiki',
 \ 'template_ext': '.tpl',
 \ 'css_name': 'style0.css',
 \ 'auto_export': 1,},{
 \ 'path': '/mnt/DATA/wiki/',
 \ 'path_html': '/mnt/DATA/vimwiki/html/',
 \ 'template_path': '/mnt/DATA/vimwiki/config/',
-\ 'template_default': 'zz',
+\ 'template_default': 'vimwiki',
 \ 'template_ext': '.tpl',
 \ 'css_name': 'style0.css',
 \ 'auto_export': 1,}]
