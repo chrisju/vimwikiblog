@@ -18,19 +18,15 @@ map <S-F5> :VimwikiAll2HTML<cr>
 map <F5> :Vimwiki2HTML<cr>
 
 let g:vimwiki_list = [{
-\ 'path': '/mnt/DATA/vimwiki/wiki/',
-\ 'path_html': '/mnt/DATA/vimwiki/html/',
-\ 'template_path': '/mnt/DATA/vimwiki/config/',
+\ 'path': '/mnt/DATA/proj/wikiblog/',
+\ 'path_html': '/mnt/DATA/proj/vimwikiblog/html/',
+\ 'template_path': '/mnt/DATA/proj/vimwikiblog/config/',
 \ 'template_default': 'vimwiki',
 \ 'template_ext': '.tpl',
 \ 'css_name': 'style0.css',
 \ 'auto_export': 1,},{
-\ 'path': '/mnt/DATA/wiki/',
-\ 'path_html': '/mnt/DATA/vimwiki/html/',
-\ 'template_path': '/mnt/DATA/vimwiki/config/',
-\ 'template_default': 'vimwiki',
-\ 'template_ext': '.tpl',
-\ 'css_name': 'style0.css',
-\ 'auto_export': 1,}]
+\ 'path': '/mnt/DATA/proj/vimwikiblog/wiki/',
+\ 'path_html': '/mnt/DATA/proj/vimwikiblog/wiki/html/',
+\ 'auto_export': 0,}]
 
 
