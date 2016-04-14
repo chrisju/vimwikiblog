@@ -5,7 +5,7 @@ vimwikiblog
 >
 > 使用说明: [http://blog.zzbalabala.com/blog/vimwikiblog.html](http://blog.zzbalabala.com/blog/vimwikiblog.html)
 >
-> 补充资料: [静态博客相关](http://blog.zzbalabala.com/blog/vimwikiblog.html)
+> 补充资料: [静态博客相关](http://blog.zzbalabala.com/blog/static_blog.html)
 
 ### 所做工作
 > 添加评论和代码高亮
