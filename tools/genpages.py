@@ -151,18 +151,15 @@ def genpages(gentpl,htmldict,attrs,indir,outdir):
     for k,v in sorted(dcat.items(),reverse=True):
         print(k,len(v),v)
         tm = time.strptime(k,"%Y-%m")
-        #不显示时间
-        #if oldyear != tm.tm_year:
-        #    oldyear = tm.tm_year
-        #    s = s + str.format('<h3>{0}</h3>\n', tm.tm_year)
-        #s = s + str.format('<h4>{0}</h4>\n', mons[tm.tm_mon - 1])
-        #s = s + '<ul>\n'
+        if oldyear != tm.tm_year:
+            oldyear = tm.tm_year
+            s = s + str.format('<h3>{0}</h3>\n', tm.tm_year)
+        s = s + str.format('<h4>{0}</h4>\n', mons[tm.tm_mon - 1])
+        s = s + '<ul>\n'
         v.sort(key=lambda p:attrs[p].time,reverse=True)
         for wiki in v:
             a=attrs[wiki]
-            #format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
-            #不显示时间
-            format = '<li><a href="{1}">{2}</a></li>\n'
+            format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
@@ -185,9 +182,7 @@ def genpages(gentpl,htmldict,attrs,indir,outdir):
         v.sort(key=lambda p:attrs[p].time,reverse=True)
         for wiki in v:
             a=attrs[wiki]
-            #format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
-            #不显示时间
-            format = '<li><a href="{1}">{2}</a></li>\n'
+            format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title
@@ -212,9 +207,7 @@ def genpages(gentpl,htmldict,attrs,indir,outdir):
         v.sort(key=lambda p:attrs[p].time,reverse=True)
         for wiki in v:
             a=attrs[wiki]
-            #format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
-            #不显示时间
-            format = '<li><a href="{1}">{2}</a></li>\n'
+            format = '<li><span>{0}</span> &raquo; <a href="{1}">{2}</a></li>\n'
             date = str.format('{0}年{1}月{2}日',a.time.tm_year,a.time.tm_mon,a.time.tm_mday)
             path = os.path.relpath(htmldict[wiki], html_dir)
             title = a.title

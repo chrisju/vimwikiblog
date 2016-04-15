@@ -37,11 +37,10 @@ def dealcatandtag(s, attrs):
             sout = m.group(1)+m.group(2)+m.group(3)+m.group(4)
             # 重写文章属性栏 给分类和tag加上链接
             sout = sout + '<ul class="tag_box inline">\n'
-            # 不显示时间
-            #p=r'<strong>(.+?)</strong>'
-            #if re.search(p,s2):
-            #    timestr=re.search(p,s2).group(1)
-            #    sout = sout + str.format('<li><a href="Archive.html">{0}</a></li>\n',timestr.split()[0])
+            p=r'<strong>(.+?)</strong>'
+            if re.search(p,s2):
+                timestr=re.search(p,s2).group(1)
+                sout = sout + str.format('<li><a href="Archive.html">{0}</a></li>\n',timestr.split()[0])
             p=r'<em>(.+?)</em>'
             if re.search(p,s2):
                 cat=re.search(p,s2).group(1)
