@@ -24,6 +24,7 @@ with open('config/genpage.tpl') as f:
 s = re.sub(r'伊谢尔伦的一角',r'xxx', s)
 s = re.sub(r'zzbalabala.com',r'xxx.com', s)
 s = re.sub(r'chris zz',r'xxx', s)
+s = re.sub(r'<li>.*?>About</a></li>',r'<li><a href="const_About.html">About</a></li>', s)
 with open('config/genpage.tpl','w') as f:
     f.write(s)
 
@@ -34,6 +35,7 @@ with open('config/vimwiki.tpl') as f:
 s = re.sub(r'伊谢尔伦的一角',r'Blog name', s)
 s = re.sub(r'zzbalabala.com',r'xxx.com', s)
 s = re.sub(r'chris zz',r'xxx', s)
+s = re.sub(r'<li>.*?>About</a></li>',r'<li><a href="const_About.html">About</a></li>', s)
 with open('config/vimwiki.tpl','w') as f:
     f.write(s)
 
