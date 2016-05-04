@@ -33,7 +33,8 @@ _linux_
 # Modify all .wiki files according to *vimwikiblog convention (important!!)*.thers are examples in vimwikiblog/wiki/
 # If first run, open wiki file with vim,type :VimwikiAll2HTML to convert all wiki files into html
 # `cd vimwikiblog`, and run `python3 tools/vimwiki2blog.py -c config/config.json`, will generate blog files in blog/ and upload to ftp(if configed), files in blog_tmp is the files modified but not uploaded, use `python3 tools/vimwiki2blog.py -c config/config.json -u` can upload them(argument '-u' means upload only)
-# Upload `site` directory to blog server, make sure that it is at the same directory with `blog`
+# copy `blog/style0.css` to remote blog directory
+# Upload `site` directory to blog server, make sure that it is at the same directory with blog directory. ex.`wwwroot/blog.xx.xx`,`wwwroot/site`
 === Advance ===
 * In `site/js/disqus.js` set `disqus_shortname` for disqus
 * Set `site/js/ga.js` for google-analytics

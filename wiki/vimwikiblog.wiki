@@ -32,15 +32,16 @@ _linux_
 # 按 *vimwikiblog约定(重要!!)* 编写wiki和对现有wiki文件进行改造.示例可以看vimwikiblog/wiki/文件夹下的.wiki文件
 # 若第一次使用,用vim打开wiki文件,使用:VimwikiAll2HTML将文件夹下所有wiki文件转为html
 # 进入vimwikiblog文件夹, 运行`python3 tools/vimwiki2blog.py -c config/config.json`, 会在blog下生成博客文件并上传到ftp(若配置有ftp), blog_tmp下是改动过的文件但未上传成功的文件, 可以使用`python3 tools/vimwiki2blog.py -c config/config.json -u`上传(添加-u表示仅上传)
-# 将 `site` 文件夹复制到博客主机中 与blog文件夹同级
+# 将`blog/style0.css`复制到远程主机的博客文件夹中
+# 将 `site` 文件夹复制到博客主机中 与博客文件夹同级 如`wwwroot/blog.xx.xx`,`wwwroot/site`
 === 详解 ===
+* 静态博客相关知识,包括评论,代码高亮等: [http://blog.zzbalabala.com/blog/static_blog.html 静态博客相关]
 * 如果自定义了blog文件夹,需将`site/css/style0.css`复制到blog文件夹下
 * 在`site/js/disqus.js`设置`disqus_shortname`为你的disqus shortname以使用评论系统
 * 在`site/js/ga.js`设置google-analytics
 * 修改样式可以修改`config/genpage.tpl`,`config/vimwiki.tpl`,`blog/style0.css`和site下的文件.其中genpage.tpl是导航页模版文件,vimwiki.tpl是vimwiki的模版文件
 * 默认的配置文件是`~/.config/vimwikiblog/config.json` 复制过去就不需要用-c指定配置文件了
-* 运行时若提示 `blog_tmp` 已存在, 可以直接手动删除 `blog_tmp`文件夹
 * 要上传需要配置blog_tmp(默认配置即可),可以保存修改的文件,同步时可以只上传这些文件
 * 可以上传到多个服务器,enable设为true即打开上传开关,目前只支持ftp
-* 可以在~/.bashrc加上 `alias upblog='cd /mnt/DATA/proj/vimwikiblog/;python3 tools/vimwiki2blog.py -c config/config.json'`,这样在修改保存.wiki文件后直接`upblog`就能同步到博客上啦
-* 更多的就自己改代码吧 记住别把自己的ftp密码公开出来o(*^▽^*)o
+* 可以在~/.bashrc加上 `alias xxupblog='cd /mnt/DATA/proj/vimwikiblog/;python3 tools/vimwiki2blog.py -c config/config.json'`,这样在修改保存.wiki文件后直接`upblog`就能同步到博客上啦
+* 更多的就自己改代码吧 记住别把自己的ftp密码公开出来 o(*^▽^*)o

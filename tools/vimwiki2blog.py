@@ -51,7 +51,7 @@ if __name__ == '__main__':
             # 删除blog_tmp
             if uploaded:
                 print('removing:', blog_tmp)
-                os.system('rm -rf '+ blog_tmp)
+                sh.rmtree(blog_tmp, ignore_errors=True)
         sys.exit(0)
 
     # 准备文件夹
@@ -61,7 +61,9 @@ if __name__ == '__main__':
         blog_tmp = blog_dir
     else:
         if os.path.exists(blog_tmp):
-            sys.exit(str.format('tmp dir "{0}" exist! pelease remove it manually.',blog_tmp))
+            print('removing:', blog_tmp)
+            sh.rmtree(blog_tmp, ignore_errors=True)
+            #sys.exit(str.format('tmp dir "{0}" exist! pelease remove it manually.',blog_tmp))
         else:
             os.makedirs(blog_tmp)
     print('dirs:',wiki_dir,html_dir,blog_dir,blog_tmp)
