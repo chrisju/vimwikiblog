@@ -18,7 +18,8 @@ if __name__ == '__main__':
     usage = '根据vimwiki的结果,修改并生成blog所需相关文件 \n%prog -h for help'
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("-c","--config-file",dest="cfg",default='~/.config/vimwikiblog/config.json',help="config file. default is ~/.config/vimwikiblog/config.json",metavar="FILE")
-    parser.add_option("-u",action="store_true",dest="uploadonly",help="only upload files in blog_tmp")
+    parser.add_option("-u",action="store_true",dest="uploadonly",help="don't generate blog, only upload files in blog_tmp")
+    parser.add_option("--upall",action="store_true",dest="uploadall",help="upload all files")
     (options,args )= parser.parse_args()
 
     print('config file:',options.cfg)
@@ -31,6 +32,8 @@ if __name__ == '__main__':
     blog_dir = j['basic']['blog']
     blog_tmp = j['basic']['blog_tmp']
     uploads = j['upload']
+
+    changed = []
 
     if options.uploadonly:
         # 上传blog_tmp的内容
@@ -61,11 +64,15 @@ if __name__ == '__main__':
         blog_tmp = blog_dir
     else:
         if os.path.exists(blog_tmp):
+            # 获取未提交的更改
+            for root,dirs,files in os.walk(blog_tmp):
+                for file in files:
+                    if file.endswith('html'):
+                        changed.append(os.path.relpath(os.path.join(root,file),blog_tmp))
+            # 删除文件夹
             print('removing:', blog_tmp)
             sh.rmtree(blog_tmp, ignore_errors=True)
-            #sys.exit(str.format('tmp dir "{0}" exist! pelease remove it manually.',blog_tmp))
-        else:
-            os.makedirs(blog_tmp)
+        os.makedirs(blog_tmp)
     print('dirs:',wiki_dir,html_dir,blog_dir,blog_tmp)
 
     # 获取有效html(有对应wiki文件的)
@@ -139,7 +146,7 @@ if __name__ == '__main__':
         print('新增:',adds)
         print('更改:',diffs)
         print('删除:',rms)
-        changed = adds+diffs
+        changed += adds+diffs
 
         # 更新blog_dir
         for name in changed:
@@ -156,13 +163,14 @@ if __name__ == '__main__':
         os.makedirs(blog_dir,exist_ok=True) # 如果连blog_dir都被删了就补回来
 
         # 清理blog_tmp
-        for root,dirs,files in os.walk(blog_tmp):
-            for file in files:
-                name = os.path.relpath(os.path.join(root,file),blog_tmp)
-                if name not in changed:
-                    re_clean(os.path.join(blog_tmp,name))
+        if not options.uploadall:
+            for root,dirs,files in os.walk(blog_tmp):
+                for file in files:
+                    name = os.path.relpath(os.path.join(root,file),blog_tmp)
+                    if name not in changed:
+                        re_clean(os.path.join(blog_tmp,name))
 
-        if changed:
+        if changed or options.uploadall:
             # 提交更改到远程
             uploaded = False
             for up in uploads:
@@ -170,9 +178,9 @@ if __name__ == '__main__':
                     uploaded = True
                     if up['type'] == 'ftp':
                         print('uploading to %s ...' % (up['host']))
-                        ftp.update(up,blog_tmp,adds+diffs,rms)
+                        ftp.update(up,blog_tmp,new if options.uploadall else changed,rms)
             # 删除blog_tmp
             if uploaded:
                 print('removing:', blog_tmp)
-                os.system('rm -rf '+ blog_tmp)
+                sh.rmtree(blog_tmp, ignore_errors=True)
 

@@ -31,12 +31,13 @@ _linux_
 # 编辑 `vimwikiblog/config/vimwiki.tpl` 和 `vimwikiblog/config/generate.tpl`.以合适内容替换所有的`xxx`字符串
 # 按 *vimwikiblog约定(重要!!)* 编写wiki和对现有wiki文件进行改造.示例可以看vimwikiblog/wiki/文件夹下的.wiki文件
 # 若第一次使用,用vim打开wiki文件,使用:VimwikiAll2HTML将文件夹下所有wiki文件转为html
-# 进入vimwikiblog文件夹, 运行`python3 tools/vimwiki2blog.py -c config/config.json`, 会在blog下生成博客文件并上传到ftp(若配置有ftp), blog_tmp下是改动过的文件但未上传成功的文件, 可以使用`python3 tools/vimwiki2blog.py -c config/config.json -u`上传(添加-u表示仅上传)
+# 进入vimwikiblog文件夹, 运行`python3 tools/vimwiki2blog.py -c config/config.json`, 会在blog下生成博客文件并上传到ftp(若配置有ftp)
 # 将`blog/style0.css`复制到远程主机的博客文件夹中
-# 将 `site` 文件夹复制到博客主机中 与博客文件夹同级 如`wwwroot/blog.xx.xx`,`wwwroot/site`
+# 将 `site` 文件夹复制到博客主机中 与博客文件夹同级(在同一个父目录下)
 === 详解 ===
 * 静态博客相关知识,包括评论,代码高亮等: [http://blog.zzbalabala.com/blog/static_blog.html 静态博客相关]
-* 如果自定义了blog文件夹,需将`site/css/style0.css`复制到blog文件夹下
+* blog_tmp下是改动过的文件但未上传成功的文件, 可以使用`python3 tools/vimwiki2blog.py -c config/config.json -u`上传(添加-u表示仅上传)
+* 加上 `--upall` 参数可以上传所有html到ftp而不仅仅是改动过的文件,在不同步时可以使用
 * 在`site/js/disqus.js`设置`disqus_shortname`为你的disqus shortname以使用评论系统
 * 在`site/js/ga.js`设置google-analytics
 * 修改样式可以修改`config/genpage.tpl`,`config/vimwiki.tpl`,`blog/style0.css`和site下的文件.其中genpage.tpl是导航页模版文件,vimwiki.tpl是vimwiki的模版文件
