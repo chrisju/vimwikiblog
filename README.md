@@ -1,11 +1,11 @@
 vimwikiblog
 =========
 
-> User Guide: [http://blog.zzbalabala.com/blog/vimwikiblog_en.html](http://blog.zzbalabala.com/blog/vimwikiblog_en.html)
+> User Guide: [http://blog2.moez.win/blog.moez.win/blog/vimwikiblog_en.html](http://blog2.moez.win/blog.moez.win/blog/vimwikiblog_en.html)
 >
-> 使用说明: [http://blog.zzbalabala.com/blog/vimwikiblog.html](http://blog.zzbalabala.com/blog/vimwikiblog.html)
+> 使用说明: [http://blog2.moez.win/blog.moez.win/blog/vimwikiblog.html](http://blog2.moez.win/blog.moez.win/blog/vimwikiblog.html)
 >
-> 补充资料: [静态博客相关](http://blog.zzbalabala.com/blog/static_blog.html)
+> 补充资料: [静态博客相关](http://blog2.moez.win/blog.moez.win/blog/static_blog.html)
 
 ### 所做工作
 > 添加评论和代码高亮
